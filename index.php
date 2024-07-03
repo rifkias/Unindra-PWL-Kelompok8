@@ -40,7 +40,7 @@
 
    
     $isCustomPage = $route->requiredAuthPage();
-    if($isCustomPage){
+    if(!$isCustomPage){
 ?>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -49,7 +49,7 @@
             <img class="animation__shake" src="<?= $uri.'assets/img/AdminLTELogo.png'?>" alt="AdminLTELogo" height="60" width="60">
         </div>
     </div>
-
+        
     <?php
     include_once('./partials/_navbar.php');
     include_once('./partials/_sidebar.php');

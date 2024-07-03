@@ -10,7 +10,7 @@
 
       <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username" name="username">
+          <input type="text" class="form-control" placeholder="Username" value="<?= @$_POST['username'] ?>" name="username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -66,8 +66,27 @@
     $password = $_POST['password'];
 
     $encPassword = hash("sha256",$password);
-    echo $encPassword;
-    // $query = $con->query("SELECT * FROM division");
+
+    $query = $con->query("SELECT * FROM employe WHERE username='$username' AND password='$encPassword'");
+    $data = $query->fetch_assoc();
+    $checkRow = $query->num_rows;
+    if($checkRow > 0){
+      session_start();
+      $_SESSION['isLogin']        = true;
+      $_SESSION['userId']         = $data['employe_id'];
+      $_SESSION['username']       = $data['username'];
+      $_SESSION['employe_name']   = $data['employe_name'];
+      $_SESSION['role']           = $data['role'];
+
+      header("location:/");
+    }else{
+      echo "
+        <script>alert('Username & Password Salah !!!')</script>
+      ";
+    }
+    // echo json_encode($data);
+    // $check = $query->num_rows;
+    // if($check)
     // $check = $query->num_rows;
 
     // echo $check;

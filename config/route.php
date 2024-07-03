@@ -18,12 +18,23 @@ class phpRouting{
 
     public function getFilename(){
         $path = $this->getPath();
+        if($path == ""){
+            $path = "dashboard";
+        }
         $filename = "";
         if($path){
             switch ($path) {
+                case "dashboard":
+                    $filename = "./page/dashboard.php";
+                    break;
                 case "login":
                     $filename = "./page/login.php";
                     break;
+                case "error":
+                    $filename = "./page/login.php";
+                    break;
+                default:
+                    $filename = "./page/errors/errorPage.php";
             }
         }
         return $filename;
@@ -39,6 +50,7 @@ class phpRouting{
         return $uri;
     }
     public function requiredAuthPage(){
+        echo $_SESSION['isLogin'];
         $arr = ["error","login",'register'];
         $res = true;
         if(in_array($this->getPath(),$arr)){
@@ -46,9 +58,11 @@ class phpRouting{
         }else{
             if($_SESSION['isLogin']){
                 $res = false;
+            }else{
+                $res = true;
             }
         }
-
+        echo $res ? "true" : "false";
         return $res;
     }
 
