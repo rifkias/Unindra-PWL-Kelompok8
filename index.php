@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +26,18 @@
     <!-- summernote -->
     <link rel="stylesheet" href="/assets/plugins/summernote/summernote-bs4.min.css">
 </head>
+<?php 
+    session_start();
+    include('config/route.php');
+    $route = new phpRouting();
+    if($route->requiredAuthPage()){
+        header("location:login");
+    }
 
+   
+    $isCustomPage = $route->requiredAuthPage();
+    if($isCustomPage){
+?>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Preloader -->
@@ -42,7 +52,9 @@
     ?>
 
     <div class="content-wrapper">
-
+        <?php 
+            include($route->getFilename());
+        ?>
 
     </div>
 
@@ -86,5 +98,10 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/assets/js/pages/dashboard.js"></script>
 </body>
-
+<?php 
+    }else{
+        include($route->getFilename());
+        // header("location:index");
+    }
+?>
 </html>
