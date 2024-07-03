@@ -1,9 +1,14 @@
+<?php 
+ $uri = $route->getUri();
+
+?>
+
 <body class="hold-transition login-page">
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+      <a href="<?=$uri?>" class="h1"><b>Admin</b>LTE</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
@@ -59,9 +64,7 @@
 
 <?php 
  if (isset($_POST['login'])) {
-    include ('config/koneksi.php');
 
-    $con = new Connection();
     $username = $_POST['username'];
     $password = $_POST['password'];
 

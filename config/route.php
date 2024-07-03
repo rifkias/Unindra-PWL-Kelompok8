@@ -30,11 +30,14 @@ class phpRouting{
                 case "login":
                     $filename = "./page/login.php";
                     break;
+                case "logout":
+                    $filename = "./page/logout.php";
+                    break;
                 case "error":
-                    $filename = "./page/login.php";
+                    $filename = "./page/errors/errorPage.php";
                     break;
                 default:
-                    $filename = "./page/errors/errorPage.php";
+                    $filename = "./page/errors/notFoundPage.php";
             }
         }
         return $filename;
@@ -49,20 +52,19 @@ class phpRouting{
         
         return $uri;
     }
+    public function checkAuth(){
+        $res = false;
+        if(isset($_SESSION['isLogin'])){
+            $res = true;
+        }
+        return $res;
+    }
     public function requiredAuthPage(){
-        echo $_SESSION['isLogin'];
         $arr = ["error","login",'register'];
         $res = true;
         if(in_array($this->getPath(),$arr)){
             $res = false;
-        }else{
-            if($_SESSION['isLogin']){
-                $res = false;
-            }else{
-                $res = true;
-            }
         }
-        echo $res ? "true" : "false";
         return $res;
     }
 

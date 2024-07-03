@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php 
+        session_start();
+        ob_start(); 
         include('config/route.php');
+        include ('config/koneksi.php');
+        $con = new Connection();
         $route = new phpRouting();
         $uri = $route->getUri();
+        $isCustomPage = $route->requiredAuthPage();
+        $isAuth = $route->checkAuth();
     ?>
 <head>
     <meta charset="utf-8">
@@ -32,15 +38,18 @@
     <link rel="stylesheet" href="<?= $uri.'assets/plugins/summernote/summernote-bs4.min.css'?>">
 </head>
 <?php 
-    session_start();
-    
-    if($route->requiredAuthPage()){
-        header("location:login");
+    if(!$isAuth){
+        if($route->getPath() !== 'login'){
+            header("location:login");
+        }
+    }else{
+        if($route->getPath() == 'login'){
+            header("location:/");
+        }
     }
 
    
-    $isCustomPage = $route->requiredAuthPage();
-    if(!$isCustomPage){
+    if($isCustomPage){
 ?>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
