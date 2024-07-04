@@ -9,11 +9,22 @@ class phpRouting{
         $explode = explode("?",$url);
         $url = $explode[0];
         // Check Basename 
-        $path = explode("/",$url);
-        if($path[0] == $this->getBasename()){
-            array_splice($path,0,1);
-            $url = implode("/",$path);
+        $paths = explode("/",$url);
+        foreach($paths as $key => $path){
+            if($path == $this->getBasename()){
+                array_splice($paths,0,$key+1);
+            }
         }
+
+        if(count($paths) == 1){
+            $url = $paths[0];
+        }else{
+            $url = implode("/",$paths);
+        }
+        // if($path[0] == $this->getBasename()){
+        //     array_splice($path,0,1);
+        //     $url = implode("/",$path);
+        // }
         return $url;
     }
 
@@ -64,8 +75,6 @@ class phpRouting{
                 $uri = $uri."/".$basePath;
             }
         }
-        echo $uri;
-        // echo dirname($_SERVER['PHP_SELF']);
         
         return $uri;
     }
