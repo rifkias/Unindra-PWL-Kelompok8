@@ -81,7 +81,7 @@
       $_SESSION['employe_name']   = $data['employe_name'];
       $_SESSION['role']           = $data['role'];
 
-      header("location:/");
+      header("location:".$uri);
     }else{
       echo "
         <script>alert('Username & Password Salah !!!')</script>
