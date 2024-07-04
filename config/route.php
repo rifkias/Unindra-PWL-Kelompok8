@@ -40,7 +40,7 @@ class phpRouting{
                 case "logout":
                     $filename = "./page/logout.php";
                     break;
-                case "lokasi/index":
+                case "lokasi":
                     $filename = "./page/lokasi/index.php";
                     break;
                 case "error":
