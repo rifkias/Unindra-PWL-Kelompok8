@@ -18,10 +18,11 @@ class phpRouting{
     }
 
     function getBasename(){
-        // return basename($_SERVER['PHP_SELF']);
         return basename(dirname($_SERVER['PHP_SELF']));
     }
-
+    function getDirname(){
+        return  dirname($_SERVER['PHP_SELF']);
+    }
     public function getFilename(){
         $path = $this->getPath();
         if($path == ""){
@@ -55,10 +56,16 @@ class phpRouting{
 
     public function getUri(){
         $uri =  (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]";
-        $basePath = $this->getBasename();
+        $basePath = $this->getDirname();
         if($basePath <> 'index.php'){
-            $uri = $uri."/".$basePath;
+            if($basePath == "/"){
+                $uri = $uri;
+            }else{
+                $uri = $uri."/".$basePath;
+            }
         }
+        echo $uri;
+        // echo dirname($_SERVER['PHP_SELF']);
         
         return $uri;
     }
