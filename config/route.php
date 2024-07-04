@@ -5,9 +5,15 @@ class phpRouting{
     public function getPath(){
         $url = $_SERVER['REQUEST_URI'];
         // Get Last Path of URI
-        $url = preg_replace('~.*/~', '', $url);
+        // $url = preg_replace('~.*/~', '', $url);
         $explode = explode("?",$url);
         $url = $explode[0];
+        // Check Basename 
+        $path = explode("/",$url);
+        if($path[0] == $this->getBasename()){
+            array_splice($path,0,1);
+            $url = implode("/",$path);
+        }
         return $url;
     }
 
@@ -23,6 +29,7 @@ class phpRouting{
         }
         $filename = "";
         if($path){
+            // echo $path;
             switch ($path) {
                 case "dashboard":
                     $filename = "./page/dashboard.php";
@@ -32,6 +39,9 @@ class phpRouting{
                     break;
                 case "logout":
                     $filename = "./page/logout.php";
+                    break;
+                case "lokasi/index":
+                    $filename = "./page/lokasi/index.php";
                     break;
                 case "error":
                     $filename = "./page/errors/errorPage.php";
