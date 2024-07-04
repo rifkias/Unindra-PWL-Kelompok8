@@ -72,7 +72,7 @@ class phpRouting{
             if($basePath == "/"){
                 $uri = $uri;
             }else{
-                $uri = $uri."/".$basePath;
+                $uri = $uri.$basePath;
             }
         }
         

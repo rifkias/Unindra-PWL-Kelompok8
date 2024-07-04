@@ -48,7 +48,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="<?= $uri ?>absensi" class="nav-link">
+                      <a href="<?= $uri ?>/absensi" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
                               Data Absensi
@@ -56,7 +56,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="<?= $uri ?>karyawan" class="nav-link">
+                      <a href="<?= $uri ?>/karyawan" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
                               Data Karyawan
@@ -64,7 +64,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="<?= $uri ?>lembur" class="nav-link">
+                      <a href="<?= $uri ?>/lembur" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
                               Data Lembur
@@ -72,7 +72,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="<?= $uri ?>lokasi" class="nav-link">
+                      <a href="<?= $uri ?>/lokasi" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
                               Data Lokasi

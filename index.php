@@ -41,14 +41,13 @@ $isAuth = $route->checkAuth();
 <?php
 if (!$isAuth) {
     if ($route->getPath() !== 'login') {
-        header("location:".$uri."login");
+        header("location:".$uri."/login");
     }
 } else {
     if ($route->getPath() == 'login') {
         header("location:".$uri);
     }
 }
-
 
 if ($isCustomPage) {
 ?>
