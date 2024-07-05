@@ -59,7 +59,6 @@ $data = $controller->getData($_GET);
                                     <div class="form-group">
                                         <label>Perpage</label>
                                         <select name="perPage" id="" class="form-control">
-                                            <option <?= @$_GET['perPage'] == '2' ? "selected" : ""  ?> value="2">2</option>
                                             <option <?= @$_GET['perPage'] == '10' ? "selected" : ""  ?> value="10">10</option>
                                             <option <?= @$_GET['perPage'] == '20' ? "selected" : ""  ?> value="20">20</option>
                                             <option <?= @$_GET['perPage'] == '30' ? "selected" : ""  ?> value="30">30</option>
@@ -72,7 +71,8 @@ $data = $controller->getData($_GET);
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-primary float-right">Search</button>
+                                    <button type="submit" class="btn btn-primary float-right mr-2">Search</button>
+                                    <a href="<?=$uri.'/lokasi'?>"><button type="button" class="btn btn-warning float-right mr-2">Clear</button></a>
                                 </div>
                             </div>
                         </form>

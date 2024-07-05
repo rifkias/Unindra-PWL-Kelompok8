@@ -10,17 +10,42 @@ class LocationController {
     }
 
     public function getData($params){
+        $where = "";
         if(@$params['perPage']){
             $this->perPage = $params['perPage'];
         }
         if(@$params['page']){
             $this->page = $params['page'];
         }
+        if(@$params['nama']){
+            $like = "'%".$params['nama']."%'";
+            if($where == ""){
+                $where .= "WHERE name LIKE ".$like;
+            }else{
+                $where .= "AND name LIKE ".$like;
+            }
+        }
+        if(@$params['provinsi']){
+            $like = "'%".$params['provinsi']."%'";
+            if($where == ""){
+                $where .= "WHERE province LIKE ".$like;
+            }else{
+                $where .= "AND province LIKE ".$like;
+            }
+        }
+        if(@$params['city']){
+            $like = "'%".$params['city']."%'";
+            if($where == ""){
+                $where .= "WHERE city LIKE ".$like;
+            }else{
+                $where .= "AND city LIKE ".$like;
+            }
+        }
         $perPage = $this->perPage;
         $page = $this->page;
 
         $currentLimit =  ($page > 1) ? ($page * $perPage) - $perPage : "0";
-        $query = "SELECT * FROM location limit $currentLimit , $perPage";
+        $query = "SELECT * FROM location  $where limit $currentLimit , $perPage";
         $res = $this->koneksi->query($query);
 
         return $res;
