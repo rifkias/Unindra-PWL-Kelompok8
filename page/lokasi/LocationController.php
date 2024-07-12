@@ -103,7 +103,16 @@ class LocationController {
         ];
         $res = $this->validator->validate($params,'create',$validate);
         if($res['status']){
-            $query = "INSERT INTO location (name,province,city,district,sub_district,zip_code,address_1,address_2) VALUES (".'"'.$params['name'].'",'.'"'.$params['province'].'",'.'"'.$params['city'].'"'.',"'.$params['district'].'"'.',"'.$params['sub_district'].'"'.','.'"'.$params['zip_code'].'",'.'"'.$params['address_1'].'",'.'"'.$params['address_2'].'");';
+            $name           = $params['name'];
+            $province       = $params['province'];
+            $city           = $params['city'];
+            $district       = $params['district'];
+            $sub_district   = $params['sub_district'];
+            $zip_code       = $params['zip_code'];
+            $address_1      = $params['address_1'];
+            $address_2      = $params['address_2'];
+            // $query = "INSERT INTO location (name,province,city,district,sub_district,zip_code,address_1,address_2) VALUES (".'"'.$params['name'].'",'.'"'.$params['province'].'",'.'"'.$params['city'].'"'.',"'.$params['district'].'"'.',"'.$params['sub_district'].'"'.','.'"'.$params['zip_code'].'",'.'"'.$params['address_1'].'",'.'"'.$params['address_2'].'");';
+            $query = "INSERT INTO location (name,province,city,district,sub_district,zip_code,address_1,address_2) VALUES ('$name','$province','$city','$district','$sub_district','$zip_code','$address_1','$address_2');";
             if($this->koneksi->query($query) === TRUE){
                 $_SESSION['success_message'] = "Data Berhasil ditambahkan";
             }else{
