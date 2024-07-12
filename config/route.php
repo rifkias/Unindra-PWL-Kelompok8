@@ -55,6 +55,12 @@ class phpRouting{
                 case "lokasi":
                     $filename = "./page/lokasi/index.php";
                     break;
+                case "lokasi/add":
+                    $filename = "./page/lokasi/create.php";
+                    break;
+                case "lokasi/delete":
+                    $filename = "./page/lokasi/delete.php";
+                    break;
                 case "error":
                     $filename = "./page/errors/errorPage.php";
                     break;
@@ -86,7 +92,7 @@ class phpRouting{
         return $res;
     }
     public function requiredAuthPage(){
-        $arr = ["error","login",'register'];
+        $arr = ["error","login",'register','lokasi/delete'];
         $res = true;
         if(in_array($this->getPath(),$arr)){
             $res = false;

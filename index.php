@@ -27,8 +27,6 @@ $isAuth = $route->checkAuth();
     <link rel="stylesheet" href="<?= $uri . '/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' ?>">
     <!-- iCheck -->
     <link rel="stylesheet" href="<?= $uri . '/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css' ?>">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="<?= $uri . '/assets/plugins/jqvmap/jqvmap.min.css' ?>">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= $uri . '/assets/css/adminlte.min.css' ?>">
     <!-- overlayScrollbars -->
@@ -37,15 +35,18 @@ $isAuth = $route->checkAuth();
     <link rel="stylesheet" href="<?= $uri . '/assets/plugins/daterangepicker/daterangepicker.css' ?>">
     <!-- summernote -->
     <link rel="stylesheet" href="<?= $uri . '/assets/plugins/summernote/summernote-bs4.min.css' ?>">
+    <link rel="stylesheet" href="<?= $uri . '/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' ?>">
+
+
 </head>
 <?php
 if (!$isAuth) {
     if ($route->getPath() !== 'login') {
-        header("location:".$uri."/login");
+        header("location:" . $uri . "/login");
     }
 } else {
     if ($route->getPath() == 'login') {
-        header("location:".$uri);
+        header("location:" . $uri);
     }
 }
 
@@ -91,9 +92,6 @@ if ($isCustomPage) {
         <script src="<?= $uri . '/assets/plugins/chart.js/Chart.min.js' ?>"></script>
         <!-- Sparklin -->
         <script src="<?= $uri . '/assets/plugins/sparklines/sparkline.js' ?>"></script>
-        <!-- JQVMap -->
-        <script src="<?= $uri . '/assets/plugins/jqvmap/jquery.vmap.min.js' ?>"></script>
-        <script src="<?= $uri . '/assets/plugins/jqvmap/maps/jquery.vmap.usa.js' ?>"></script>
         <!-- jQuery Knob Chart -->
         <script src="<?= $uri . '/assets/plugins/jquery-knob/jquery.knob.min.js' ?>"></script>
         <!-- daterangepicker -->
@@ -107,15 +105,56 @@ if ($isCustomPage) {
         <script src="<?= $uri . '/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' ?>"></script>
         <!-- AdminLTE App -->
         <script src="<?= $uri . '/assets/js/adminlte.js' ?>"></script>
-        <!-- AdminLTE for demo purposes -->
-        <!-- <script src="< ?= $uri.'/assets/js/demo.js'?>"></script> -->
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="<?= $uri . '/assets/js/pages/dashboard.js' ?>"></script>
+        <!-- <script src="< ?= $uri . '/assets/js/pages/dashboard.js' ?>"></script> -->
+        <script src="<?= $uri . '/assets/plugins/sweetalert2/sweetalert2.min.js' ?>"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </body>
+    <script>
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
 <?php
 } else {
     include($route->getFilename());
     // header("location:index");
+}
+
+
+if (isset($_SESSION['success_message'])) {
+    echo "<script>
+     Toast.fire({
+        icon: 'success',
+        title: '" . $_SESSION['success_message'] . "'
+      })
+    </script>";
+    // Preventing Alert not showing because was loaded on requested page not redirected page
+    if (isset($_SESSION['viewAlert'])) {
+        unset($_SESSION['viewAlert']);
+        unset($_SESSION['success_message']);
+    } else {
+        $_SESSION['viewAlert'] = 1;
+    }
+}
+
+if (isset($_SESSION['fail_message'])) {
+    echo "<script>
+    Toast.fire({
+       icon: 'error',
+       title: '" . $_SESSION['fail_message'] . "'
+     })
+   </script>";
+    if (isset($_SESSION['viewAlert'])) {
+        unset($_SESSION['viewAlert']);
+        unset($_SESSION['fail_message']);
+    } else {
+        $_SESSION['viewAlert'] = 1;
+    }
 }
 ?>
 

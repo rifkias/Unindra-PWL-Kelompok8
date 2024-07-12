@@ -12,9 +12,14 @@ $data = $controller->getData($_GET);
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="<?= $uri ?>">Dashboard</a></li>
                     <li class="breadcrumb-item active">Master Lokasi</li>
                 </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="<?= $uri . '/lokasi/add' ?>"><button class="btn btn-primary float-right">Tambah Data</button></a>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -29,6 +34,7 @@ $data = $controller->getData($_GET);
                     <div class="card-header">
                         <h3 class="card-title">Search</h3>
                         <div class="card-tools">
+
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
@@ -72,7 +78,7 @@ $data = $controller->getData($_GET);
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary float-right mr-2">Search</button>
-                                    <a href="<?=$uri.'/lokasi'?>"><button type="button" class="btn btn-warning float-right mr-2">Clear</button></a>
+                                    <a href="<?= $uri . '/lokasi' ?>"><button type="button" class="btn btn-warning float-right mr-2">Clear</button></a>
                                 </div>
                             </div>
                         </form>
@@ -113,7 +119,7 @@ $data = $controller->getData($_GET);
                                         <td>
                                             <a href="<?= $uri . '/lokasi/detail/' . $d['location_id'] ?>"><button class="btn btn-sm btn-primary mr-1">Detail</button></a>
                                             <button class="btn btn-sm btn-warning mr-1">Edit</button>
-                                            <button class="btn btn-sm btn-danger mr-1">Delete</button>
+                                            <button class="btn btn-sm btn-danger mr-1" onclick="deleteValue(<?= $d['location_id'] ?>)">Delete</button>
                                         </td>
                                     </tr>
                                 <?php
@@ -132,7 +138,7 @@ $data = $controller->getData($_GET);
                             <?php
                             for ($x = 1; $x <= $paginateData['totalPage']; $x++) {
                             ?>
-                            <li class="page-item <?=  $paginateData['currentPage'] == $x ? "disabled" : "" ?> "> <a class="page-link" href="<?= $paginateData['params'] . "&page=" . $x ?>"><?= $x ?></a> </li>
+                                <li class="page-item <?= $paginateData['currentPage'] == $x ? "disabled" : "" ?> "> <a class="page-link" href="<?= $paginateData['params'] . "&page=" . $x ?>"><?= $x ?></a> </li>
                             <?php
                             }
                             ?>
@@ -147,4 +153,25 @@ $data = $controller->getData($_GET);
 
     </div><!-- /.container-fluid -->
 </section>
+<form action="<?=$uri?>/lokasi/delete" method="POST" id="formDelete">
+</form>
+<script>
+    function deleteValue(id) {
+        Swal.fire({
+            title: 'Apakah Kamu Yakin ?',
+            text: 'Data yang dihapus tidak bisa dikembalikan',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes!",
+        }).then((result) => {
+            if (result.value) {
+                $('form#formDelete').append('<input type="text" name="id" id="id" hidden readonly value="'+id+'" />');
+                $("form#formDelete").submit();
+            }
+        });
+
+        // console.log(id);
+    }
+</script>
 <!-- /.content -->
