@@ -9,7 +9,7 @@ class LocationController {
     public function __construct(Connection $conn)
     {
         $this->koneksi = $conn;
-        $this->validator = new Validation($this->tableName,$conn);
+        $this->validator = new Validation($this->tableName,$conn,'location_id');
     }
 
     public function getData($params){
@@ -111,7 +111,6 @@ class LocationController {
             $zip_code       = $params['zip_code'];
             $address_1      = $params['address_1'];
             $address_2      = $params['address_2'];
-            // $query = "INSERT INTO location (name,province,city,district,sub_district,zip_code,address_1,address_2) VALUES (".'"'.$params['name'].'",'.'"'.$params['province'].'",'.'"'.$params['city'].'"'.',"'.$params['district'].'"'.',"'.$params['sub_district'].'"'.','.'"'.$params['zip_code'].'",'.'"'.$params['address_1'].'",'.'"'.$params['address_2'].'");';
             $query = "INSERT INTO location (name,province,city,district,sub_district,zip_code,address_1,address_2) VALUES ('$name','$province','$city','$district','$sub_district','$zip_code','$address_1','$address_2');";
             if($this->koneksi->query($query) === TRUE){
                 $_SESSION['success_message'] = "Data Berhasil ditambahkan";
@@ -125,4 +124,57 @@ class LocationController {
         }
     }
 
+    public function getDetail($id){
+        $queryString = "SELECT * FROM location WHERE location_id = $id";
+        $res = null;
+        $data = null;
+        $status = true;
+        $query = $this->koneksi->query($queryString);
+        if($query->num_rows > 0){
+            $data = $query->fetch_assoc();
+        }else{
+            $status = false;
+            $_SESSION['fail_message'] = "Invalid Location Id";
+        }
+
+        $res['status'] = $status;
+        $res['data'] = $data;
+        return $res;
+
+
+    }
+
+    public function editData($params){
+        $validate = [
+            "name"          =>['required','noDuplicate'],
+            "province"      => ['required'],
+            "city"          => ['required'],
+            "district"      => ['required'],
+            "sub_district"  => ['required'],
+            "address_1"     => ['required'],
+            "zip_code"      => ['required','max:5','numeric'],
+        ];
+        $res = $this->validator->validate($params,'update',$validate,'location_id');
+        if($res['status']){
+            $id           = $params['id'];
+            $name           = $params['name'];
+            $province       = $params['province'];
+            $city           = $params['city'];
+            $district       = $params['district'];
+            $sub_district   = $params['sub_district'];
+            $zip_code       = $params['zip_code'];
+            $address_1      = $params['address_1'];
+            $address_2      = $params['address_2'];
+            $query = "UPDATE location SET name='$name',province='$province',city='$city',district='$district',sub_district='$sub_district',zip_code='$zip_code',address_1='$address_1',address_2='$address_2' WHERE location_id =  $id";
+            if($this->koneksi->query($query) === TRUE){
+                $_SESSION['success_message'] = "Data Berhasil Diupdate";
+            }else{
+                $_SESSION['fail_message'] = "Data Gagal Diupdate";
+                $res['status'] = false;
+            }
+            return $res;
+        }else{
+            return $res;
+        }
+    }
 }

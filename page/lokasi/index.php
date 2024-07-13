@@ -118,7 +118,8 @@ $data = $controller->getData($_GET);
                                         <td><?= $d['address_1'] ?></td>
                                         <td>
                                             <a href="<?= $uri . '/lokasi/detail/' . $d['location_id'] ?>"><button class="btn btn-sm btn-primary mr-1">Detail</button></a>
-                                            <button class="btn btn-sm btn-warning mr-1">Edit</button>
+                                            <a href="<?= $uri . '/lokasi/edit/' . $d['location_id'] ?>"><button class="btn btn-sm btn-warning mr-1">Edit</button></a>
+                                            <!-- <button class="btn btn-sm btn-warning mr-1">Edit</button> -->
                                             <button class="btn btn-sm btn-danger mr-1" onclick="deleteValue(<?= $d['location_id'] ?>)">Delete</button>
                                         </td>
                                     </tr>

@@ -4,14 +4,16 @@ class Validation
 {
     protected $koneksi = null;
     protected $tableName = null;
+    protected $primaryKey = null;
 
-    function __construct($tableName, Connection $conn)
+    function __construct($tableName, Connection $conn,$primaryKey)
     {
         $this->koneksi = $conn;
         $this->tableName = $tableName;
+        $this->primaryKey = $primaryKey;
     }
 
-    public function validate($data, $type, $validation)
+    public function validate($data, $types, $validation)
     {
         $res = [];
         $status = true;
@@ -41,8 +43,8 @@ class Validation
                         }
 
                         if ($type == 'noDuplicate') {
-                            if ($type == 'update') {
-                                if (!$this->noDuplicate($dataValue, $key, @$data['location_id'])) {
+                            if ($types == 'update') {
+                                if (!$this->noDuplicate($dataValue, $key, @$data['id'])) {
                                     $status = false;
                                     $message[$key][] = ["Field " . ucfirst(str_replace("_", " ", $key)) . " Already Exists"];
                                 }
@@ -93,9 +95,8 @@ class Validation
         $res = true;
         $query = "SELECT $key FROM " . $this->tableName . " WHERE $key = '$value'";
         if ($id) {
-            $query .= "AND location_id <> $id";
+            $query .= "AND $this->primaryKey <> $id";
         }
-
         $check = $this->koneksi->query($query);
         $total = $check->num_rows;
         if ($total > 0) {
