@@ -64,15 +64,6 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="<?= $uri ?>/lokasi" class="nav-link">
-                          <i class="nav-icon fas fa-th"></i>
-                          <p>
-                              Data Lokasi
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-header">Transaksi</li>
-                  <li class="nav-item">
                       <a href="<?= $uri ?>/lembur" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
@@ -80,6 +71,15 @@
                           </p>
                       </a>
                   </li>
+                  <li class="nav-item">
+                      <a href="<?= $uri ?>/lokasi" class="nav-link">
+                          <i class="nav-icon fas fa-th"></i>
+                          <p>
+                              Data Lokasi
+                          </p>
+                      </a>
+                  </li>
+                  <li class="nav-header">EXAMPLES</li>
                  
               </ul>
           </nav>

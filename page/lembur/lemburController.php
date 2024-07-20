@@ -50,7 +50,7 @@ class lemburController {
 
         $currentLimit =  ($page > 1) ? ($page * $perPage) - $perPage : "0";
         // $query = "SELECT * FROM location  $where limit $currentLimit , $perPage";
-        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, l.lembur_id AS lembur_id, e.employe_name AS employe_name, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id GROUP BY nameMonth, e.employe_name";
+        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, l.lembur_id AS lembur_id, e.employe_name AS employe_name, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id GROUP BY nameMonth, lembur_id,employe_name";
         $res = $this->koneksi->query($query);
 
         return $res;
@@ -89,7 +89,7 @@ class lemburController {
     }
     public function countData(){
         //$query = "SELECT * FROM lembur";
-        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, l.lembur_id AS lembur_id, e.employe_name AS employe_name, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id GROUP BY nameMonth, e.employe_name";
+        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, l.lembur_id AS lembur_id, e.employe_name AS employe_name, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id GROUP BY nameMonth, lembur_id,employe_name";
         $res = $this->koneksi->query($query);
         $total = $res->num_rows;
         return $total;
