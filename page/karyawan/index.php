@@ -54,13 +54,14 @@ $data = $controller->getData($_GET);
                                         <label>
                                             Lokasi
                                         </label>
-                                        <input type="text" name="provinsi" class="form-control" value="<?= @$_GET['provinsi'] ?>" placeholder="Provinsi">
+                                        <!-- <input type="text" name="provinsi" class="form-control" value="< ?= @$_GET['provinsi'] ?>" placeholder="Provinsi"> -->
+                                        <select name="location_id" id="locationSelect" class="form-control select2"></select>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Nik</label>
-                                        <input type="text" name="city" class="form-control" value="<?= @$_GET['city'] ?>" placeholder="Kota">
+                                        <input type="text" name="nik" class="form-control" value="<?= @$_GET['nik'] ?>" placeholder="Kota">
                                     </div>
                                 </div>
                                 <div class="col-auto">
@@ -176,5 +177,67 @@ $data = $controller->getData($_GET);
 
         // console.log(id);
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#locationSelect').select2({
+            ajax: {
+                delay: 250,
+                url: '<?= $uri . "/api/searchLocation.php" ?>',
+                data: function(params) {
+                    var query = {
+                        "search": params.term
+                    }
+                    return query;
+                },
+                processResults: function(data) {
+                    var results = [];
+                    $.each(data, function(k, v) {
+                        results.push({
+                            id: v.location_id,
+                            text: v.name,
+                        });
+                    });
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: results
+                    };
+                }
+
+            },
+            allowClear: true,
+            placeholder: 'Select Location',
+        });
+        <?php
+        if (isset($_GET['location_id'])) {
+            $id = $_GET['location_id'];
+        ?>
+
+            function setPeriodeData(uri) {
+                $.ajax({
+                    type: 'GET',
+                    url: uri
+                }).then(function(data) {
+                    // create the option and append to Select2
+                    var option = new Option(data.name, data.location_id, true, true);
+
+                    $('#locationSelect').append(option).trigger('change');
+
+                    $('#locationSelect').trigger({
+                        type: 'select2:select',
+                        params: {
+                            data: data
+                        }
+                    });
+
+                });
+            }
+            var uri = "<?= $uri . "/api/searchLocation.php?type=detail&id=$id" ?>";
+            setPeriodeData(uri);
+        <?php
+        }
+        ?>
+    });
 </script>
 <!-- /.content -->

@@ -28,20 +28,20 @@ class KaryawanController {
                 $where .= "AND name LIKE ".$like;
             }
         }
-        if(@$params['provinsi']){
-            $like = "'%".$params['provinsi']."%'";
+        if(@$params['location_id']){
+            $location_id = $params['location_id'];
             if($where == ""){
-                $where .= "WHERE province LIKE ".$like;
+                $where .= "WHERE employe.location_id = '$location_id' ";
             }else{
-                $where .= "AND province LIKE ".$like;
+                $where .= "AND employe.location_id = '$location_id'";
             }
         }
-        if(@$params['city']){
-            $like = "'%".$params['city']."%'";
+        if(@$params['nik']){
+            $like = "'%".$params['nik']."%'";
             if($where == ""){
-                $where .= "WHERE city LIKE ".$like;
+                $where .= "WHERE nik LIKE ".$like;
             }else{
-                $where .= "AND city LIKE ".$like;
+                $where .= "AND nik LIKE ".$like;
             }
         }
         $perPage = $this->perPage;
@@ -92,7 +92,6 @@ class KaryawanController {
     }
 
     public function addData($params){
-        echo json_encode($params);
         $validate = [
             "employe_name"  =>['required','noDuplicate'],
             "date_of_birth" => ['required','date'],
@@ -106,21 +105,22 @@ class KaryawanController {
         ];
         $res = $this->validator->validate($params,'create',$validate);
         if($res['status']){
-            // $name           = $params['name'];
-            // $province       = $params['province'];
-            // $city           = $params['city'];
-            // $district       = $params['district'];
-            // $sub_district   = $params['sub_district'];
-            // $zip_code       = $params['zip_code'];
-            // $address_1      = $params['address_1'];
-            // $address_2      = $params['address_2'];
-            // $query = "INSERT INTO location (name,province,city,district,sub_district,zip_code,address_1,address_2) VALUES ('$name','$province','$city','$district','$sub_district','$zip_code','$address_1','$address_2');";
-            // if($this->koneksi->query($query) === TRUE){
-            //     $_SESSION['success_message'] = "Data Berhasil ditambahkan";
-            // }else{
-            //     $_SESSION['fail_message'] = "Data Gagal Ditambahkan";
-            //     $res['status'] = false;
-            // }
+            $employe_name       = $params['employe_name'];
+            $date_of_birth      = $params['date_of_birth'];
+            $nik                = $params['nik'];
+            $username           = $params['username'];
+            $password           = hash("sha256",$params['password']);
+            $location_id        = $params['location_id'];
+            $salary             = $params['salary'];
+            $role               = $params['role'];
+            $is_active          = $params['is_active'];
+            $query = "INSERT INTO employe (employe_name,date_of_birth,nik,username,password,location_id,salary,role,is_active) VALUES ('$employe_name','$date_of_birth','$nik','$username','$password','$location_id','$salary','$role','$is_active')";
+            if($this->koneksi->query($query) === TRUE){
+                $_SESSION['success_message'] = "Data Berhasil ditambahkan";
+            }else{
+                $_SESSION['fail_message'] = "Data Gagal Ditambahkan";
+                $res['status'] = false;
+            }
             return $res;
         }else{
             return $res;

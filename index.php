@@ -36,7 +36,43 @@ $isAuth = $route->checkAuth();
     <!-- summernote -->
     <link rel="stylesheet" href="<?= $uri . '/assets/plugins/summernote/summernote-bs4.min.css' ?>">
     <link rel="stylesheet" href="<?= $uri . '/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' ?>">
+    <link rel="stylesheet" href="<?= $uri . '/assets/plugins/select2/css/select2.min.css' ?>">
+    <link rel="stylesheet" href="<?= $uri . '/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' ?>">
+    <link rel="stylesheet" href="../../">
 
+     <!-- jQuery -->
+     <script src="<?= $uri . '/assets/plugins/jquery/jquery.min.js' ?>"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="<?= $uri . '/assets/plugins/jquery-ui/jquery-ui.min.js' ?>"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="<?= $uri . '/assets/plugins/bootstrap/js/bootstrap.bundle.min.js' ?>"></script>
+    <!-- ChartJS -->
+    <script src="<?= $uri . '/assets/plugins/chart.js/Chart.min.js' ?>"></script>
+    <!-- Sparklin -->
+    <script src="<?= $uri . '/assets/plugins/sparklines/sparkline.js' ?>"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="<?= $uri . '/assets/plugins/jquery-knob/jquery.knob.min.js' ?>"></script>
+    <!-- daterangepicker -->
+    <script src="<?= $uri . '/assets/plugins/moment/moment.min.js' ?>"></script>
+    <script src="<?= $uri . '/assets/plugins/daterangepicker/daterangepicker.js' ?>"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="<?= $uri . '/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' ?>"></script>
+    <!-- Summernote -->
+    <script src="<?= $uri . '/assets/plugins/summernote/summernote-bs4.min.js' ?>"></script>
+    <!-- overlayScrollbars -->
+    <script src="<?= $uri . '/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' ?>"></script>
+    <!-- AdminLTE App -->
+    <script src="<?= $uri . '/assets/js/adminlte.js' ?>"></script>
+    <script src="<?= $uri . '/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js' ?>"></script>
+
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <!-- <script src="< ?= $uri . '/assets/js/pages/dashboard.js' ?>"></script> -->
+    <script src="<?= $uri . '/assets/plugins/sweetalert2/sweetalert2.min.js' ?>"></script>
+    <script src="<?= $uri . '/assets/plugins/select2/js/select2.full.min.js' ?>"></script>
 
 </head>
 <?php
@@ -77,41 +113,6 @@ if ($isCustomPage) {
         include_once('./partials/_footer.php');
 
         ?>
-
-        <!-- jQuery -->
-        <script src="<?= $uri . '/assets/plugins/jquery/jquery.min.js' ?>"></script>
-        <!-- jQuery UI 1.11.4 -->
-        <script src="<?= $uri . '/assets/plugins/jquery-ui/jquery-ui.min.js' ?>"></script>
-        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-        <script>
-            $.widget.bridge('uibutton', $.ui.button)
-        </script>
-        <!-- Bootstrap 4 -->
-        <script src="<?= $uri . '/assets/plugins/bootstrap/js/bootstrap.bundle.min.js' ?>"></script>
-        <!-- ChartJS -->
-        <script src="<?= $uri . '/assets/plugins/chart.js/Chart.min.js' ?>"></script>
-        <!-- Sparklin -->
-        <script src="<?= $uri . '/assets/plugins/sparklines/sparkline.js' ?>"></script>
-        <!-- jQuery Knob Chart -->
-        <script src="<?= $uri . '/assets/plugins/jquery-knob/jquery.knob.min.js' ?>"></script>
-        <!-- daterangepicker -->
-        <script src="<?= $uri . '/assets/plugins/moment/moment.min.js' ?>"></script>
-        <script src="<?= $uri . '/assets/plugins/daterangepicker/daterangepicker.js' ?>"></script>
-        <!-- Tempusdominus Bootstrap 4 -->
-        <script src="<?= $uri . '/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' ?>"></script>
-        <!-- Summernote -->
-        <script src="<?= $uri . '/assets/plugins/summernote/summernote-bs4.min.js' ?>"></script>
-        <!-- overlayScrollbars -->
-        <script src="<?= $uri . '/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' ?>"></script>
-        <!-- AdminLTE App -->
-        <script src="<?= $uri . '/assets/js/adminlte.js' ?>"></script>
-        <script src="<?= $uri . '/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js' ?>"></script>
-
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <!-- <script src="< ?= $uri . '/assets/js/pages/dashboard.js' ?>"></script> -->
-        <script src="<?= $uri . '/assets/plugins/sweetalert2/sweetalert2.min.js' ?>"></script>
-
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </body>
     <script>
         var Toast = Swal.mixin({

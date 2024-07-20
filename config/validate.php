@@ -83,7 +83,7 @@ class Validation
     private function required($value)
     {
         $res = true;
-        if ($value == "") {
+        if ($value === "") {
             $res = false;
         }
 
