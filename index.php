@@ -105,6 +105,8 @@ if ($isCustomPage) {
         <script src="<?= $uri . '/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' ?>"></script>
         <!-- AdminLTE App -->
         <script src="<?= $uri . '/assets/js/adminlte.js' ?>"></script>
+        <script src="<?= $uri . '/assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js' ?>"></script>
+
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <!-- <script src="< ?= $uri . '/assets/js/pages/dashboard.js' ?>"></script> -->
         <script src="<?= $uri . '/assets/plugins/sweetalert2/sweetalert2.min.js' ?>"></script>

@@ -50,7 +50,7 @@ class lemburController {
 
         $currentLimit =  ($page > 1) ? ($page * $perPage) - $perPage : "0";
         // $query = "SELECT * FROM location  $where limit $currentLimit , $perPage";
-        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, l.lembur_id AS lembur_id, e.employe_name AS employe_name, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id GROUP BY nameMonth, lembur_id,employe_name";
+        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, e.employe_name AS employe_name,e.employe_id AS employe_id, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id GROUP BY nameMonth, e.employe_name, e.employe_id";
         $res = $this->koneksi->query($query);
 
         return $res;
@@ -89,7 +89,7 @@ class lemburController {
     }
     public function countData(){
         //$query = "SELECT * FROM lembur";
-        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, l.lembur_id AS lembur_id, e.employe_name AS employe_name, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id GROUP BY nameMonth, lembur_id,employe_name";
+        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, e.employe_name AS employe_name,e.employe_id AS employe_id, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id GROUP BY nameMonth, e.employe_name, e.employe_id";
         $res = $this->koneksi->query($query);
         $total = $res->num_rows;
         return $total;
@@ -128,15 +128,14 @@ class lemburController {
     //     }
     // }
 
-    public function getDetail($id){
-        //$queryString = "SELECT * FROM location WHERE location_id = $id";
-        $queryString = "SELECT * FROM lembur WHERE id = '$id' LEFT JOIN karyawan k ON k.id = lembur.karyawan_id LEFT JOIN absesn a on a.id = lembur.id_lembur";
+    public function getDetail($id,$month){
+        $queryString = "SELECT * FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id WHERE MONTHNAME(a.absensi_date) = '$month' AND a.employe_id = '$id'";
         $res = null;
         $data = null;
         $status = true;
         $query = $this->koneksi->query($queryString);
         if($query->num_rows > 0){
-            $data = $query->fetch_assoc();
+            $data = $query;
         }else{
             $status = false;
             $_SESSION['fail_message'] = "Invalid Lembur Id";

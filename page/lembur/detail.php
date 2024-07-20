@@ -5,14 +5,23 @@
 <?php
 require('lemburController.php');
 $controller = new lemburController($con);
-$id = $route->getParams();
 
-$data = $controller->getDetail($id);
-if (!$data['status']) {
-    header('Location:' . $uri . '/lembur');
-} else {
-    $value = $data['data'];
+if(isset($_GET)){
+    if(isset($_GET['employe_id']) && isset($_GET['nameMonth'])){
+        $employeId = $_GET['employe_id'];
+        $nameMonth = $_GET['nameMonth'];
+        $data = $controller->getDetail($employeId,$nameMonth);
+        if (!$data['status']) {
+            $_SESSION['fail_message'] = "Invalid Data";
+            header('Location:' . $uri . '/lembur');
+        } else {
+            $value = $data['data'];
+        }
+    }else{
+        $_SESSION['fail_message'] = "Invalid Lembur Id";
+    }
 }
+
 
 ?>
 

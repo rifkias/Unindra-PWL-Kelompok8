@@ -82,6 +82,21 @@ class phpRouting
                 case "lokasi/delete":
                     $filename = "./page/lokasi/delete.php";
                     break;
+                case "karyawan":
+                    $filename = "./page/karyawan/index.php";
+                    break;
+                case "karyawan/add":
+                    $filename = "./page/karyawan/create.php";
+                    break;
+                case "karyawan/detail":
+                    $filename = "./page/karyawan/detail.php";
+                    break;
+                case "karyawan/edit":
+                    $filename = "./page/karyawan/edit.php";
+                    break;
+                case "karyawan/delete":
+                    $filename = "./page/karyawan/delete.php";
+                    break;
                 case "lembur":
                      $filename = "./page/lembur/index.php";
                     break;

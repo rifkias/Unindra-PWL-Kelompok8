@@ -19,7 +19,7 @@ $data = $controller->getData($_GET);
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <a href="<?= $uri . '/lokasi/add' ?>"><button class="btn btn-primary float-right">Tambah Data</button></a>
+                <a href="<?= $uri . '/karyawan/add' ?>"><button class="btn btn-primary float-right">Tambah Data</button></a>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -51,13 +51,15 @@ $data = $controller->getData($_GET);
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label>Nama Provinsi</label>
+                                        <label>
+                                            Lokasi
+                                        </label>
                                         <input type="text" name="provinsi" class="form-control" value="<?= @$_GET['provinsi'] ?>" placeholder="Provinsi">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label>Nama Kota</label>
+                                        <label>Nik</label>
                                         <input type="text" name="city" class="form-control" value="<?= @$_GET['city'] ?>" placeholder="Kota">
                                     </div>
                                 </div>
@@ -78,7 +80,7 @@ $data = $controller->getData($_GET);
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary float-right mr-2">Search</button>
-                                    <a href="<?= $uri . '/lokasi' ?>"><button type="button" class="btn btn-warning float-right mr-2">Clear</button></a>
+                                    <a href="<?= $uri . '/karyawan' ?>"><button type="button" class="btn btn-warning float-right mr-2">Clear</button></a>
                                 </div>
                             </div>
                         </form>
@@ -114,11 +116,11 @@ $data = $controller->getData($_GET);
                                         <td><?= $d['date_of_birth'] ?></td>
                                         <td><?= $d['nik'] ?></td>
                                         <td><?= $d['username'] ?></td>
-                                        <td><?= "a" ?></td>
+                                        <td><?= $d['location_name'] ?></td>
                                         <td><?= $d['role'] ?></td>
                                         <td>
-                                            <a href="<?= $uri . '/karayawan/detail/' . $d['employe_id'] ?>"><button class="btn btn-sm btn-primary mr-1">Detail</button></a>
-                                            <a href="<?= $uri . '/karayawan/edit/' . $d['employe_id'] ?>"><button class="btn btn-sm btn-warning mr-1">Edit</button></a>
+                                            <a href="<?= $uri . '/karyawan/detail/' . $d['employe_id'] ?>"><button class="btn btn-sm btn-primary mr-1">Detail</button></a>
+                                            <a href="<?= $uri . '/karyawan/edit/' . $d['employe_id'] ?>"><button class="btn btn-sm btn-warning mr-1">Edit</button></a>
                                             <!-- <button class="btn btn-sm btn-warning mr-1">Edit</button> -->
                                             <button class="btn btn-sm btn-danger mr-1" onclick="deleteValue(<?= $d['employe_id'] ?>)">Delete</button>
                                         </td>
@@ -154,7 +156,7 @@ $data = $controller->getData($_GET);
 
     </div><!-- /.container-fluid -->
 </section>
-<form action="<?=$uri?>/karayawan/delete" method="POST" id="formDelete">
+<form action="<?=$uri?>/karyawan/delete" method="POST" id="formDelete">
 </form>
 <script>
     function deleteValue(id) {
