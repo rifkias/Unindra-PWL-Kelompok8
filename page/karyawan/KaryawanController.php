@@ -93,10 +93,10 @@ class KaryawanController {
 
     public function addData($params){
         $validate = [
-            "employe_name"  =>['required','noDuplicate'],
+            "employe_name"  =>['required'],
             "date_of_birth" => ['required','date'],
             "nik"           => ['required'],
-            "username"      => ['required'],
+            "username"      => ['required','noDuplicate'],
             "password"      => ['required'],
             "location_id"   => ['required','numeric'],
             "salary"        => ['required','numeric'],
@@ -149,26 +149,36 @@ class KaryawanController {
 
     public function editData($params){
         $validate = [
-            "name"          =>['required','noDuplicate'],
-            "province"      => ['required'],
-            "city"          => ['required'],
-            "district"      => ['required'],
-            "sub_district"  => ['required'],
-            "address_1"     => ['required'],
-            "zip_code"      => ['required','max:5','numeric'],
+            "employe_name"  =>['required'],
+            "date_of_birth" => ['required','date'],
+            "nik"           => ['required'],
+            "username"      => ['required','noDuplicate'],
+            "location_id"   => ['required','numeric'],
+            "salary"        => ['required','numeric'],
+            "role"          => ['required'],
+            "is_active"     => ['required'],
         ];
-        $res = $this->validator->validate($params,'update',$validate,'location_id');
-        if($res['status']){
-            $id           = $params['id'];
-            $name           = $params['name'];
-            $province       = $params['province'];
-            $city           = $params['city'];
-            $district       = $params['district'];
-            $sub_district   = $params['sub_district'];
-            $zip_code       = $params['zip_code'];
-            $address_1      = $params['address_1'];
-            $address_2      = $params['address_2'];
-            $query = "UPDATE location SET name='$name',province='$province',city='$city',district='$district',sub_district='$sub_district',zip_code='$zip_code',address_1='$address_1',address_2='$address_2' WHERE location_id =  $id";
+        $res = $this->validator->validate($params,'update',$validate,'employe_id');
+        if($res['status']){ 
+            
+            $id                 = $params['id'];
+            $employe_name       = $params['employe_name'];
+            $date_of_birth      = $params['date_of_birth'];
+            $nik                = $params['nik'];
+            $username           = $params['username'];
+            $password           = hash("sha256",$params['password']);
+            $location_id        = $params['location_id'];
+            $salary             = $params['salary'];
+            $role               = $params['role'];
+            $is_active          = $params['is_active'];
+            $query = "UPDATE employe SET employe_name='$employe_name',date_of_birth='$date_of_birth',nik='$nik',username='$username',location_id='$location_id',salary='$salary',role='$role',is_active='$is_active' ";
+
+            if($params['password'] !== ""){
+                $query .= ",password='$password' ";
+            }
+
+            $query .= "WHERE employe_id =  $id";
+
             if($this->koneksi->query($query) === TRUE){
                 $_SESSION['success_message'] = "Data Berhasil Diupdate";
             }else{

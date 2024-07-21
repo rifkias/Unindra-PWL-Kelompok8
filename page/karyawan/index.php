@@ -61,7 +61,7 @@ $data = $controller->getData($_GET);
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Nik</label>
-                                        <input type="text" name="nik" class="form-control" value="<?= @$_GET['nik'] ?>" placeholder="Kota">
+                                        <input type="text" name="nik" class="form-control" value="<?= @$_GET['nik'] ?>" placeholder="NIK">
                                     </div>
                                 </div>
                                 <div class="col-auto">
