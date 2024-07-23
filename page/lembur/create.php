@@ -47,11 +47,12 @@ if (isset($_POST['submit'])) {
                     <div class="card-body">
                         <form action="" method="POST">
                             <div class="form-group">
-                                <label for="">Nama Karyawan</label>
-                                <input type="text" class="form-control <?= isset($error['name']) ? 'is-invalid' : "" ?> " name="name" id="" placeholder="employee Name" value="<?= @$_POST['name'] ?>">
+                                <label for="employe_id">Nama Karyawan</label>
+                                 <select name="employe_id" id="employeSelect" class="form-control select2 <?= isset($error['employe_id']) ? 'is-invalid' : "" ?> ">
+                                 </select>
                                 <?php
-                                if (isset($error['name'])) {
-                                    foreach ($error['name'] as $err) {
+                                if (isset($error['employe_id'])) {
+                                    foreach ($error['employe_id'] as $err) {
                                 ?>
                                         <span class="error invalid-feedback"><?= $err[0] ?></span>
                                 <?php
@@ -163,3 +164,65 @@ if (isset($_POST['submit'])) {
     </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+
+<script>
+    $(document).ready(function() {
+        $('#employeSelect').select2({
+            ajax: {
+                delay: 250,
+                url: '<?= $uri . "/api/searchEmploye.php" ?>',
+                data: function(params) {
+                    var query = {
+                        "search": params.term
+                    }
+                    return query;
+                },
+                processResults: function(data) {
+                    var results = [];
+                    $.each(data, function(k, v) {
+                        results.push({
+                            id: v.employe_id,
+                            text: v.employe_name,
+                        });
+                    });
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: results
+                    };
+                }
+
+            },
+            allowClear: true,
+            placeholder: 'Select Employe',
+        });
+        <?php
+        if (isset($_POST['employe_id'])) {
+            $id = $_POST['employe_id'];
+        ?>
+
+            function setPeriodeData(uri) {
+                $.ajax({
+                    type: 'GET',
+                    url: uri
+                }).then(function(data) {
+                    // create the option and append to Select2
+                    var option = new Option(data.employe_name, data.employe_id, true, true);
+
+                    $('#employeSelect').append(option).trigger('change');
+
+                    $('#employeSelect').trigger({
+                        type: 'select2:select',
+                        params: {
+                            data: data
+                        }
+                    });
+
+                });
+            }
+            var uri = "<?= $uri . "/api/searchEmploye.php?type=detail&id=$id" ?>";
+            setPeriodeData(uri);
+        <?php
+        }
+        ?>
+    });
+</script>

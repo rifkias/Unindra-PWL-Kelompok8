@@ -76,16 +76,17 @@ if(isset($_GET)){
                                 ?>
                                     <tr>
                                         <td><?= $no ?></td>
-                                        <td><?= $d['nameMonth'] ?></td>
+                                        <td><?= $d['lembur_id'] ?></td>
+                                        <td><?= $d['absensi_date'] ?></td>
                                         <td><?= $d['employe_name'] ?></td>
-                                        <td><?= $d['total_lembur'] ?></td>
-                                        <td>Rp. <?= $d['cost_overtime'] ?>,-</td>
-                                        <td>Rp. <?= $d['amount_overtime'] ?>,-</td>
-                                        <td><?= $d['district'] ?></td>
-                                        <td><?= $d['address_1'] ?></td>
+                                        <td><?= $d['start_overtime'] ?></td>
+                                        <td><?= $d['end_overtime'] ?>,-</td>
+                                        <td><?= $d['submitted_by'] ?>,-</td>
+                                        <td><?= $d['created_at'] ?></td>
+                                        <td><?= $d['created_by'] ?></td>
                                         <td>
-                                            <a href="<?= $uri . '/lembur/detail/' . $d['lembur_id'] ?>"><button class="btn btn-sm btn-primary mr-1">Detail</button></a>
-                                            <a href="<?= $uri . '/lembur/edit/' . $d['lembur_id'] ?>"><button class="btn btn-sm btn-warning mr-1">Edit</button></a>
+                                            <!-- <a href="<?= $uri . '/lembur/detail/' . $d['lembur_id'] ?>"><button class="btn btn-sm btn-primary mr-1">Detail</button></a>
+                                            <a href="<?= $uri . '/lembur/edit/' . $d['lembur_id'] ?>"><button class="btn btn-sm btn-warning mr-1">Edit</button></a> -->
                                             <!-- <button class="btn btn-sm btn-warning mr-1">Edit</button> -->
                                             <button class="btn btn-sm btn-danger mr-1" onclick="deleteValue(<?= $d['lembur_id'] ?>)">Delete</button>
                                         </td>

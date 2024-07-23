@@ -95,47 +95,48 @@ class lemburController {
         return $total;
     }
 
-    // public function addData($params){
-    //     $validate = [
-    //         "name"          =>['required','noDuplicate'],
-    //         "province"      => ['required'],
-    //         "city"          => ['required'],
-    //         "district"      => ['required'],
-    //         "sub_district"  => ['required'],
-    //         "address_1"     => ['required'],
-    //         "zip_code"      => ['required','max:5','numeric'],
-    //     ];
-    //     $res = $this->validator->validate($params,'create',$validate);
-    //     if($res['status']){
+    public function addData($params){
+        $validate = [
+            "employe_id"          => ['required', 'numeric'],
+            "absensi_date"        => ['required', 'date'],
+            "start_overtime"      => ['required'],
+    //         "name"                =>['required','noDuplicate'],
+    //         "sub_district"        => ['required'],
+    //         "address_1"           => ['required'],
+    //         "zip_code"            => ['required','max:5','numeric'],
+        ];
+        $res = $this->validator->validate($params,'create',$validate);
+        if($res['status']){
+            $employe           = $params['employe_id'];
+            $absensi           = $params['absensi_date'];
+            $start             = $params['start_overtime'];
+            $end               = $params['end_overtime'];
     //         $name           = $params['name'];
-    //         $province       = $params['province'];
-    //         $city           = $params['city'];
-    //         $district       = $params['district'];
-    //         $sub_district   = $params['sub_district'];
     //         $zip_code       = $params['zip_code'];
     //         $address_1      = $params['address_1'];
     //         $address_2      = $params['address_2'];
-    //         $query = "INSERT INTO location (name,province,city,district,sub_district,zip_code,address_1,address_2) VALUES ('$name','$province','$city','$district','$sub_district','$zip_code','$address_1','$address_2');";
-    //         if($this->koneksi->query($query) === TRUE){
-    //             $_SESSION['success_message'] = "Data Berhasil ditambahkan";
-    //         }else{
-    //             $_SESSION['fail_message'] = "Data Gagal Ditambahkan";
-    //             $res['status'] = false;
-    //         }
-    //         return $res;
-    //     }else{
-    //         return $res;
-    //     }
-    // }
+            $query = "INSERT INTO lembur (lembur_id, absensi_id, start_date, end_date, request_from, created_by) VALUES ('$employe','$absensi','$start','$end');";
+            if($this->koneksi->query($query) === TRUE){
+                $_SESSION['success_message'] = "Data Berhasil ditambahkan";
+            }else{
+                $_SESSION['fail_message'] = "Data Gagal Ditambahkan";
+                $res['status'] = false;
+            }
+            return $res;
+        }else{
+            return $res;
+        }
+    }
 
     public function getDetail($id,$month){
-        $queryString = "SELECT * FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id WHERE MONTHNAME(a.absensi_date) = '$month' AND a.employe_id = '$id'";
+        $queryString = "SELECT l.lembur_id AS lembur_id, a.absensi_date AS absensi_date, e.employe_name AS employe_name, e.employe_id AS employe_id, l.start_date AS start_overtime, l.end_date AS end_overtime, l.request_from AS submitted_by, l.created_at AS created_at, l.created_by AS created_by FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id =  e.employe_id WHERE MONTHNAME(a.absensi_date) = '$month' AND a.employe_id = '$id' GROUP BY l.lembur_id";
         $res = null;
         $data = null;
         $status = true;
+
         $query = $this->koneksi->query($queryString);
         if($query->num_rows > 0){
-            $data = $query;
+            $data = $query->fetch_assoc();
         }else{
             $status = false;
             $_SESSION['fail_message'] = "Invalid Lembur Id";
@@ -144,6 +145,24 @@ class lemburController {
         $res['status'] = $status;
         $res['data'] = $data;
         return $res;
+    }
+
+    public function detail() {
+        //Mendapatkan parameter dari URL
+        $employe_id = $_GET['employe_id'];
+        $nameMonth = $_GET['nameMonth'];
+
+    // Memanggil fungsi getDetail untuk mendapatkan data rincian lembur
+    $result = $this->getDetail($employe_id, $nameMonth);
+
+    // Memeriksa status dan menampilkan data rincian lembur
+    if ($result['status']) {
+        $data = $result['data'];
+        // Memuat tampilan detail.php dan mengirimkan data
+        include 'detail.php';
+    } else {
+        echo "<p>Data tidak ditemukan.</p>";
+    }
     }
 
     //fungsi edit data
