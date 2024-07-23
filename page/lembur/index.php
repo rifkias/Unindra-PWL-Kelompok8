@@ -78,7 +78,7 @@ $data = $controller->getData($_GET);
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary float-right mr-2">Search</button>
-                                    <a href="<?= $uri . '/lokasi' ?>"><button type="button" class="btn btn-warning float-right mr-2">Clear</button></a>
+                                    <a href="<?= $uri . '/lembur' ?>"><button type="button" class="btn btn-warning float-right mr-2">Clear</button></a>
                                 </div>
                             </div>
                         </form>
