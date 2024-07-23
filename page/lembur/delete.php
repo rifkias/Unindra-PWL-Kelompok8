@@ -8,7 +8,7 @@ if (isset($_POST)) {
     } else {
         $_SESSION['fail_message'] = 'Data Gagal Dihapus';
     }
-    header('Location:' . $uri.'/lokasi');
+    header('Location:' . $uri.'/lembur');
 } else {
     $_SESSION['fail_message'] = 'Invalid Method';
     header('Location:' . $uri);
