@@ -28,8 +28,9 @@ class DashboardController {
     }
 
     private function getTotalLembur(){
+        $monthName = date("F");
         $userId = $this->userId;
-        $query = "SELECT * FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id WHERE a.employe_id = '$userId'";
+        $query = "SELECT * FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id WHERE a.employe_id = '$userId' AND MONTHNAME(a.absensi_date) = '$monthName';";
         $res = $this->koneksi->query($query);
         $total = $res->num_rows;
         return $total;

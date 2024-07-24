@@ -11,7 +11,6 @@ if ($dataAbsen) {
     $type = 'checkout';
     $absenId = $dataAbsen['absensi_id'];
 }
-echo json_encode($data);
 ?>
 
 <div class="content-header">
@@ -102,7 +101,7 @@ echo json_encode($data);
             </div>
             <div class="col-lg-3 col-6">
 
-                <div class="small-box bg-primary">
+                <div class="small-box bg-danger">
                     <div class="inner">
                         <h3><?= @$data['totalAbsen'] ?></h3>
                         <p>Total Absensi Bulan Ini</p>
@@ -110,7 +109,7 @@ echo json_encode($data);
                     <div class="icon">
                         <i class="fas fa-calendar"></i>
                     </div>
-                    <a href="<?= $uri . '/lokasi' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?= $uri . '/absensi' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
