@@ -10,6 +10,7 @@ $route = new phpRouting();
 $uri = $route->getUri();
 $isCustomPage = $route->requiredAuthPage();
 $isAuth = $route->checkAuth();
+date_default_timezone_set("Asia/Jakarta");
 ?>
 
 <head>

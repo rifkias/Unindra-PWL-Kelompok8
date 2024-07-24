@@ -59,7 +59,7 @@ class phpRouting
             // echo $path;
             switch ($path) {
                 case "dashboard":
-                    $filename = "./page/dashboard.php";
+                    $filename = "./page/dashboard/dashboard.php";
                     break;
                 case "login":
                     $filename = "./page/login.php";
@@ -111,6 +111,21 @@ class phpRouting
                     break;
                 case "lembur/delete":
                      $filename = "./page/lembur/delete.php";
+                    break;
+                case "absensi":
+                        $filename = "./page/absen/index.php";
+                    break;
+                case "absensi/add":
+                        $filename = "./page/absen/create.php";
+                    break;
+                case "absensi/detail":
+                        $filename = "./page/absen/detail.php";
+                    break;
+                case "absensi/edit":
+                        $filename = "./page/absen/edit.php";
+                    break;
+                case "absensi/delete":
+                        $filename = "./page/absen/delete.php";
                     break;
                 case "error":
                     $filename = "./page/errors/errorPage.php";
