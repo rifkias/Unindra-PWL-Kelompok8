@@ -2,14 +2,14 @@
 include('config/validate.php');
 class AbsenController {
     protected $koneksi = null;
-    protected $tableName = "location";
+    protected $tableName = "absensi";
     protected $validator = null;
     protected $perPage = 10;
     protected $page = 1;
     public function __construct(Connection $conn)
     {
         $this->koneksi = $conn;
-        $this->validator = new Validation($this->tableName,$conn,'location_id');
+        $this->validator = new Validation($this->tableName,$conn,'absensi_id');
     }
 
     public function getData($params){
@@ -20,35 +20,35 @@ class AbsenController {
         if(@$params['page']){
             $this->page = $params['page'];
         }
-        if(@$params['nama']){
-            $like = "'%".$params['nama']."%'";
+        if(@$params['karyawan_id']){
+            $like = $params['karyawan_id'];
             if($where == ""){
-                $where .= "WHERE name LIKE ".$like;
+                $where .= "WHERE absensi.employe_id = '$like'";
             }else{
-                $where .= "AND name LIKE ".$like;
+                $where .= "AND absensi.employe_id  = '$like'";
             }
         }
-        if(@$params['provinsi']){
-            $like = "'%".$params['provinsi']."%'";
+
+        if(@$params['absenDate']){
+            $dates = rawurldecode($params['absenDate']);
+            $dateExplode = explode("-",$dates);
+            $date1 = date("Y-m-d",strtotime(trim(str_replace("/","-",$dateExplode[0]))));
+            $date2 = date("Y-m-d",strtotime(trim(str_replace("/","-",$dateExplode[1]))));
+            // echo str_replace("/","-",$dateExplode[1]);
+            $params = "BETWEEN '$date1' AND '$date2'";
+            // $like = $params['karyawan_id'];
             if($where == ""){
-                $where .= "WHERE province LIKE ".$like;
+                $where .= "WHERE absensi.absensi_date $params";
             }else{
-                $where .= "AND province LIKE ".$like;
+                $where .= "AND absensi.absensi_date $params";
             }
         }
-        if(@$params['city']){
-            $like = "'%".$params['city']."%'";
-            if($where == ""){
-                $where .= "WHERE city LIKE ".$like;
-            }else{
-                $where .= "AND city LIKE ".$like;
-            }
-        }
+       
         $perPage = $this->perPage;
         $page = $this->page;
 
         $currentLimit =  ($page > 1) ? ($page * $perPage) - $perPage : "0";
-        $query = "SELECT * FROM location  $where limit $currentLimit , $perPage";
+        $query = "SELECT absensi.*,employe.employe_name as employe_name FROM absensi LEFT JOIN employe on absensi.employe_id = employe.employe_id  $where limit $currentLimit , $perPage";
         $res = $this->koneksi->query($query);
 
         return $res;

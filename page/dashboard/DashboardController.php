@@ -15,6 +15,7 @@ class DashboardController {
         $res['totalLembur'] = $this->getTotalLembur();
         $res['totalLokasi'] = $this->getTotalLocation();
         $res['dataAbsen'] = $this->getCurrentAbsen();
+        $res['totalAbsen'] = $this->getCurrentMonthAttendance();
 
         return $res;
     }
@@ -48,5 +49,14 @@ class DashboardController {
         $res = $this->koneksi->query($query);
         $data = $res->fetch_assoc();
         return $data;
+    }
+
+    private function getCurrentMonthAttendance(){
+        $userId = $this->userId;
+        $monthName = date("F");
+        $query = " SELECT * FROM absensi WHERE employe_id = '$userId' AND MONTHNAME(absensi_date) = '$monthName';";
+        $res = $this->koneksi->query($query);
+        $total = $res->num_rows;
+        return $total;
     }
 }

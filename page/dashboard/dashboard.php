@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require('DashboardController.php');
 $controller = new DashboardController($con);
@@ -7,7 +7,7 @@ $data = $controller->getData();
 $type = 'checkin';
 $dataAbsen = $data['dataAbsen'];
 
-if($dataAbsen){
+if ($dataAbsen) {
     $type = 'checkout';
     $absenId = $dataAbsen['absensi_id'];
 }
@@ -45,16 +45,16 @@ echo json_encode($data);
                         <i class="ion ion-clock"></i>
                         <i class="fa-solid fa-users"></i>
                     </div>
-                    <?php 
-                        if($type == 'checkin'){
+                    <?php
+                    if ($type == 'checkin') {
                     ?>
-                    <a href="<?= $uri."/api/checkInEmploye.php" ?>" class="small-box-footer">Check In <i class="fas fa-arrow-circle-right"></i></a>
-                    <?php 
-                        }else{
+                        <a href="<?= $uri . "/api/checkInEmploye.php" ?>" class="small-box-footer">Check In <i class="fas fa-arrow-circle-right"></i></a>
+                    <?php
+                    } else {
                     ?>
-                    <a href="<?= $uri."/api/checkOutEmploye.php?absenId=$absenId" ?>" class="small-box-footer">Check Out <i class="fas fa-arrow-circle-right"></i></a>
-                    <?php 
-                        }
+                        <a href="<?= $uri . "/api/checkOutEmploye.php?absenId=$absenId" ?>" class="small-box-footer">Check Out <i class="fas fa-arrow-circle-right"></i></a>
+                    <?php
+                    }
                     ?>
                 </div>
             </div>
@@ -70,7 +70,7 @@ echo json_encode($data);
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="<?= $uri.'/karyawan' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?= $uri . '/karyawan' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -84,7 +84,7 @@ echo json_encode($data);
                     <div class="icon">
                         <i class="fas fa-user-clock"></i>
                     </div>
-                    <a href="<?= $uri.'/karyawan' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?= $uri . '/lembur' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -97,7 +97,20 @@ echo json_encode($data);
                     <div class="icon">
                         <i class="fas fa-map-pin"></i>
                     </div>
-                    <a href="<?= $uri.'/karyawan' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?= $uri . '/lokasi' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h3><?= @$data['totalAbsen'] ?></h3>
+                        <p>Total Absensi Bulan Ini</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <a href="<?= $uri . '/lokasi' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
