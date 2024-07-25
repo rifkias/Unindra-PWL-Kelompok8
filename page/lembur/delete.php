@@ -1,8 +1,8 @@
 <?php
 header("Content-type: application/json");
 if (isset($_POST)) {
-    $location_id = $_POST['id'];
-    $query = "DELETE FROM lembur WHERE lembur_id=$lembur_id";
+    $lembur_id = $_POST['id'];
+    $query = "DELETE FROM lembur WHERE lembur_id='$lembur_id'";
     if ($con->query($query) === TRUE) {
         $_SESSION['success_message'] = 'Data Berhasil Dihapus';
     } else {

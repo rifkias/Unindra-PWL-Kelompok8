@@ -45,20 +45,19 @@ $data = $controller->getData($_GET);
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label>Nama Karyawan</label>
-                                        <input type="search" name="nama" class="form-control" value="<?= @$_GET['nama'] ?>" placeholder="employee Name">
+                                        <label>
+                                            Karyawan
+                                        </label>
+                                        <!-- <input type="text" name="provinsi" class="form-control" value="< ?= @$_GET['provinsi'] ?>" placeholder="Provinsi"> -->
+                                        <select name="karyawan_id" id="karyawanSelect" class="form-control select2"></select>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label>Tanggal Awal</label>
-                                        <input type="date" name="provinsi" class="form-control" value="<?= @$_GET['provinsi'] ?>" placeholder="Start Date">
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label>Tanggal Akhir</label>
-                                        <input type="date" name="city" class="form-control" value="<?= @$_GET['city'] ?>" placeholder="End Date">
+                                        <label>
+                                            Bulan Lembur
+                                        </label>
+                                        <input type="text" name="bulanLembur" value="<?= @$_GET['bulanLembur'] ?>" class="form-control float-right" id="dateRange">
                                     </div>
                                 </div>
                                 <div class="col-auto">
@@ -115,10 +114,8 @@ $data = $controller->getData($_GET);
                                         <td><?= $d['total_lembur'] ?></td>
                                         <td>Rp. <?= $d['cost_overtime'] ?>,-</td>
                                         <td>Rp. <?= $d['amount_overtime'] ?>,-</td>
-                                        <!-- <td><?= $d['district'] ?></td> -->
-                                        <!-- <td><?= $d['address_1'] ?></td> -->
                                         <td>
-                                            <a href="<?= $uri . '/lembur/detail?employe_id='.$d['employe_id'].'&nameMonth='.$d['nameMonth']?>"><button class="btn btn-sm btn-primary mr-1">Detail</button></a>
+                                            <a href="<?= $uri . '/lembur/detail?employe_id=' . $d['employe_id'] . '&nameMonth=' . $d['nameMonth'] ?>"><button class="btn btn-sm btn-primary mr-1">Detail</button></a>
                                             <!-- <a href="< ?= $uri . '/lokasi/edit/' . $d['location_id'] ?>"><button class="btn btn-sm btn-warning mr-1">Edit</button></a> -->
                                             <!-- <button class="btn btn-sm btn-warning mr-1">Edit</button> -->
                                             <!-- <button class="btn btn-sm btn-danger mr-1" onclick="deleteValue(< ?= $d['location_id'] ?>)">Delete</button> -->
@@ -155,7 +152,7 @@ $data = $controller->getData($_GET);
 
     </div><!-- /.container-fluid -->
 </section>
-<form action="<?=$uri?>/lembur/delete" method="POST" id="formDelete">
+<form action="<?= $uri ?>/lembur/delete" method="POST" id="formDelete">
 </form>
 <script>
     function deleteValue(id) {
@@ -168,12 +165,92 @@ $data = $controller->getData($_GET);
             confirmButtonText: "Yes!",
         }).then((result) => {
             if (result.value) {
-                $('form#formDelete').append('<input type="text" name="id" id="id" hidden readonly value="'+id+'" />');
+                $('form#formDelete').append('<input type="text" name="id" id="id" hidden readonly value="' + id + '" />');
                 $("form#formDelete").submit();
             }
         });
 
         // console.log(id);
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#dateRange').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            onClose: function(dateText, inst) {
+                var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).val($.datepicker.formatDate('MM yy', new Date(year, month, 1)));
+            }
+        });
+        $("#dateRange").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
+        $('#karyawanSelect').select2({
+            ajax: {
+                delay: 250,
+                url: '<?= $uri . "/api/searchEmploye.php" ?>',
+                data: function(params) {
+                    var query = {
+                        "search": params.term
+                    }
+                    return query;
+                },
+                processResults: function(data) {
+                    var results = [];
+                    $.each(data, function(k, v) {
+                        results.push({
+                            id: v.employe_id,
+                            text: v.employe_name,
+                        });
+                    });
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: results
+                    };
+                }
+
+            },
+            allowClear: true,
+            placeholder: 'Select Karyawan',
+        });
+        <?php
+        if (isset($_GET['karyawan_id'])) {
+            $id = $_GET['karyawan_id'];
+        ?>
+
+            function setPeriodeData(uri) {
+                $.ajax({
+                    type: 'GET',
+                    url: uri
+                }).then(function(data) {
+                    // create the option and append to Select2
+                    var option = new Option(data.employe_name, data.employe_id, true, true);
+
+                    $('#karyawanSelect').append(option).trigger('change');
+
+                    $('#karyawanSelect').trigger({
+                        type: 'select2:select',
+                        params: {
+                            data: data
+                        }
+                    });
+
+                });
+            }
+            var uri = "<?= $uri . "/api/searchEmploye.php?type=detail&id=$id" ?>";
+            setPeriodeData(uri);
+        <?php
+        }
+        ?>
+    });
 </script>
 <!-- /.content -->

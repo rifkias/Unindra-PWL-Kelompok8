@@ -128,4 +128,25 @@ if (isset($_GET)) {
         </div>
     </div><!-- /.container-fluid -->
 </section>
+<form action="<?=$uri?>/lembur/delete" method="POST" id="formDelete">
+
+<script>
+    function deleteValue(id) {
+        Swal.fire({
+            title: 'Apakah Kamu Yakin ?',
+            text: 'Data yang dihapus tidak bisa dikembalikan',
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes!",
+        }).then((result) => {
+            if (result.value) {
+                $('form#formDelete').append('<input type="text" name="id" id="id" hidden readonly value="'+id+'" />');
+                $("form#formDelete").submit();
+            }
+        });
+
+        // console.log(id);
+    }
+</script>
 <!-- /.content -->

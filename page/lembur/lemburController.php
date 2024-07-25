@@ -21,28 +21,26 @@ class lemburController {
         if(@$params['page']){
             $this->page = $params['page'];
         }
-        if(@$params['nama']){
-            $like = "'%".$params['nama']."%'";
+        if(@$params['karyawan_id']){
+            $like = $params['karyawan_id'];
             if($where == ""){
-                $where .= "WHERE name LIKE ".$like;
+                $where .= "WHERE a.employe_id = '$like'";
             }else{
-                $where .= "AND name LIKE ".$like;
+                $where .= "AND a.employe_id  = '$like'";
             }
         }
-        if(@$params['provinsi']){
-            $like = "'%".$params['provinsi']."%'";
-            if($where == ""){
-                $where .= "WHERE province LIKE ".$like;
-            }else{
-                $where .= "AND province LIKE ".$like;
-            }
-        }
-        if(@$params['city']){
-            $like = "'%".$params['city']."%'";
-            if($where == ""){
-                $where .= "WHERE city LIKE ".$like;
-            }else{
-                $where .= "AND city LIKE ".$like;
+        if(@$params['bulanLembur']){
+            $explode = explode(" ",@$params['bulanLembur']);
+            if(count($explode) > 0){
+                $month = $explode[0];
+                $year = $explode[1];
+
+                if($where == ""){
+                    $where .= "WHERE MONTHNAME(a.absensi_date) = '$month' AND YEAR(a.absensi_date) = '$year'";
+                }else{
+                    $where .= "AND (MONTHNAME(a.absensi_date) = '$month' AND YEAR(a.absensi_date) = '$year')";
+                }
+
             }
         }
         $perPage = $this->perPage;
@@ -50,9 +48,8 @@ class lemburController {
 
         $currentLimit =  ($page > 1) ? ($page * $perPage) - $perPage : "0";
         // $query = "SELECT * FROM location  $where limit $currentLimit , $perPage";
-        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, e.employe_name AS employe_name,e.employe_id AS employe_id, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id GROUP BY nameMonth, e.employe_name, e.employe_id";
+        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, e.employe_name AS employe_name,e.employe_id AS employe_id, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id $where GROUP BY nameMonth, e.employe_name, e.employe_id limit $currentLimit , $perPage";
         $res = $this->koneksi->query($query);
-
         return $res;
     }
 
@@ -96,30 +93,43 @@ class lemburController {
     }
 
     public function addData($params){
+
         $validate = [
             "employe_id"          => ['required', 'numeric'],
-            "absensi_date"        => ['required', 'date'],
-            "start_overtime"      => ['required'],
-    //         "name"                =>['required','noDuplicate'],
-    //         "sub_district"        => ['required'],
-    //         "address_1"           => ['required'],
-    //         "zip_code"            => ['required','max:5','numeric'],
+            "tanggalLembur"        => ['required', 'date'],
+            "lembur"      => ['required'],
         ];
         $res = $this->validator->validate($params,'create',$validate);
         if($res['status']){
             $employe           = $params['employe_id'];
-            $absensi           = $params['absensi_date'];
-            $start             = $params['start_overtime'];
-            $end               = $params['end_overtime'];
-    //         $name           = $params['name'];
-    //         $zip_code       = $params['zip_code'];
-    //         $address_1      = $params['address_1'];
-    //         $address_2      = $params['address_2'];
-            $query = "INSERT INTO lembur (lembur_id, absensi_id, start_date, end_date, request_from, created_by) VALUES ('$employe','$absensi','$start','$end');";
-            if($this->koneksi->query($query) === TRUE){
-                $_SESSION['success_message'] = "Data Berhasil ditambahkan";
+            $tanggalAbsen = $params['tanggalLembur'];
+            $absensiData = $this->getAbsensiId($employe,$tanggalAbsen);
+            if($absensiData){
+                $absensiId = $absensiData['absensi_id'];
+                $explodeLembur = explode("-",$params['lembur']);
+
+                if(count($explodeLembur) > 0){
+                    $start = str_replace("/","-",trim($explodeLembur[0]));
+                    $end = str_replace("/","-",trim($explodeLembur[1]));
+                    $requestFrom = $_SESSION['userId'];
+                    $created_by = $_SESSION['employe_name'];
+                    $query = "INSERT INTO lembur (absensi_id,start_date,end_date,request_from,created_by) VALUES ('$absensiId','$start','$end','$requestFrom','$created_by');";
+
+                    if($this->koneksi->query($query) === TRUE){
+                        $_SESSION['success_message'] = "Data Berhasil ditambahkan";
+                    }else{
+                        $_SESSION['fail_message'] = "Data Gagal Ditambahkan";
+                        $res['status'] = false;
+                    }
+                }else{
+                    $_SESSION['fail_message'] = "Invalid Lembur Date";
+                    $res['message']['lembur'][] = ['Invalid Lembur Date'];
+                    $res['status'] = false;        
+                }
+
             }else{
-                $_SESSION['fail_message'] = "Data Gagal Ditambahkan";
+                $_SESSION['fail_message'] = "Invalid Lembur Date";
+                $res['message']['tanggalLembur'][] = ['Invalid Lembur Date'];
                 $res['status'] = false;
             }
             return $res;
@@ -148,38 +158,12 @@ class lemburController {
     }
 
 
-    //fungsi edit data
-    // public function editData($params){
-    //     $validate = [
-    //         "name"          =>['required','noDuplicate'],
-    //         "province"      => ['required'],
-    //         "city"          => ['required'],
-    //         "district"      => ['required'],
-    //         "sub_district"  => ['required'],
-    //         "address_1"     => ['required'],
-    //         "zip_code"      => ['required','max:5','numeric'],
-    //     ];
-    //     $res = $this->validator->validate($params,'update',$validate,'location_id');
-    //     if($res['status']){
-    //         $id           = $params['id'];
-    //         $name           = $params['name'];
-    //         $province       = $params['province'];
-    //         $city           = $params['city'];
-    //         $district       = $params['district'];
-    //         $sub_district   = $params['sub_district'];
-    //         $zip_code       = $params['zip_code'];
-    //         $address_1      = $params['address_1'];
-    //         $address_2      = $params['address_2'];
-    //         $query = "UPDATE location SET name='$name',province='$province',city='$city',district='$district',sub_district='$sub_district',zip_code='$zip_code',address_1='$address_1',address_2='$address_2' WHERE location_id =  $id";
-    //         if($this->koneksi->query($query) === TRUE){
-    //             $_SESSION['success_message'] = "Data Berhasil Diupdate";
-    //         }else{
-    //             $_SESSION['fail_message'] = "Data Gagal Diupdate";
-    //             $res['status'] = false;
-    //         }
-    //         return $res;
-    //     }else{
-    //         return $res;
-    //     }
-    // }
+   private function getAbsensiId($employeId,$date){
+    $query = "SELECT * FROM absensi WHERE employe_id = '$employeId' AND absensi_date = '$date' LIMIT 1";
+    $res = $this->koneksi->query($query);
+    $datas = $res->fetch_assoc();
+
+
+    return $datas;
+   }
 }
