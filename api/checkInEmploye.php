@@ -6,7 +6,7 @@ $con = new Connection();
 if(isset($_SESSION['userId'])){
     $userId = $_SESSION['userId'];
     $date = date("Y-m-d");
-    $dateTime = date("Y-m-d h:i:s");
+    $dateTime = date("Y-m-d H:i:s");
 
 
     $query = "INSERT INTO absensi (employe_id,absensi_date,check_in) VALUES ('$userId','$date','$dateTime');";

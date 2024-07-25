@@ -6,7 +6,7 @@ $con = new Connection();
 if(isset($_SESSION['userId']) && isset($_GET['absenId'])){
     $userId = $_SESSION['userId'];
     $absenId = $_GET['absenId'];
-    $dateTime = date("Y-m-d h:i:s");
+    $dateTime = date("Y-m-d H:i:s");
 
     $query = "UPDATE absensi SET check_out='$dateTime' WHERE absensi_id='$absenId';";
     if($con->query($query) === TRUE){

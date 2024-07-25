@@ -23,9 +23,9 @@ class KaryawanController {
         if(@$params['nama']){
             $like = "'%".$params['nama']."%'";
             if($where == ""){
-                $where .= "WHERE name LIKE ".$like;
+                $where .= "WHERE employe.employe_name LIKE ".$like;
             }else{
-                $where .= "AND name LIKE ".$like;
+                $where .= "AND employe.employe_name LIKE ".$like;
             }
         }
         if(@$params['location_id']){
@@ -46,11 +46,10 @@ class KaryawanController {
         }
         $perPage = $this->perPage;
         $page = $this->page;
-
+        
         $currentLimit =  ($page > 1) ? ($page * $perPage) - $perPage : "0";
         $query = "SELECT employe.* ,location.name as location_name FROM employe LEFT JOIN location on location.location_id = employe.location_id $where limit $currentLimit , $perPage";
         $res = $this->koneksi->query($query);
-
         return $res;
     }
 

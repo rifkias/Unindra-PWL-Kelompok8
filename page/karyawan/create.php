@@ -138,7 +138,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                 <label for="">Role</label>
-                                <input type="text" class="form-control <?= isset($error['role']) ? 'is-invalid' : "" ?> " name="role" placeholder="Nama Lokasi" value="<?= @$_POST['role'] ?>">
+                                <input type="text" class="form-control <?= isset($error['role']) ? 'is-invalid' : "" ?> " name="role" placeholder="Nama Role" value="<?= @$_POST['role'] ?>">
                                 <?php
                                 if (isset($error['role'])) {
                                     foreach ($error['role'] as $err) {

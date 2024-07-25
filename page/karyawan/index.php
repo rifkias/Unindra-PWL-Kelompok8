@@ -46,7 +46,7 @@ $data = $controller->getData($_GET);
                                 <div class="col">
                                     <div class="form-group">
                                         <label>Nama Karyawan</label>
-                                        <input type="text" name="nama" class="form-control" value="<?= @$_GET['nama'] ?>" placeholder="Location Name">
+                                        <input type="text" name="nama" class="form-control" value="<?= @$_GET['nama'] ?>" placeholder="Nama Karyawan">
                                     </div>
                                 </div>
                                 <div class="col">

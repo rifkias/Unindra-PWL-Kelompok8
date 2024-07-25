@@ -72,21 +72,7 @@ if ($dataAbsen) {
                     <a href="<?= $uri . '/karyawan' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-
             <div class="col-lg-4 col-6">
-
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3><?= @$data['totalLembur'] ?></h3>
-                        <p>Total Lembur</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-user-clock"></i>
-                    </div>
-                    <a href="<?= $uri . '/lembur' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-6">
 
                 <div class="small-box bg-primary">
                     <div class="inner">
@@ -99,6 +85,20 @@ if ($dataAbsen) {
                     <a href="<?= $uri . '/lokasi' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+            <div class="col-lg-3 col-6">
+
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3><?= @$data['totalLembur'] ?></h3>
+                        <p>Total Lembur Bulan Ini</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user-clock"></i>
+                    </div>
+                    <a href="<?= $uri . '/lembur' ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+          
             <div class="col-lg-3 col-6">
 
                 <div class="small-box bg-danger">

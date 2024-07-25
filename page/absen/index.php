@@ -198,7 +198,7 @@ $data = $controller->getData($_GET);
 
             },
             allowClear: true,
-            placeholder: 'Select Location',
+            placeholder: 'Select Karyawan',
         });
         <?php
         if (isset($_GET['karyawan_id'])) {
