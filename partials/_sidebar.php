@@ -79,7 +79,6 @@
                           </p>
                       </a>
                   </li>
-                  <li class="nav-header">EXAMPLES</li>
                  
               </ul>
           </nav>

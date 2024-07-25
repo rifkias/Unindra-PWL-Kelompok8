@@ -33,8 +33,6 @@ date_default_timezone_set("Asia/Jakarta");
     <!-- Daterange picker -->
     <link rel="stylesheet" href="<?= $uri . '/assets/plugins/daterangepicker/daterangepicker.css' ?>">
     <!-- <link rel="stylesheet" href="< ?= $uri . '/assets/plugins/datepicker/css/datepicker.css' ?>"> -->
-    <!-- summernote -->
-    <link rel="stylesheet" href="<?= $uri . '/assets/plugins/summernote/summernote-bs4.min.css' ?>">
     <link rel="stylesheet" href="<?= $uri . '/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' ?>">
     <link rel="stylesheet" href="<?= $uri . '/assets/plugins/select2/css/select2.min.css' ?>">
     <link rel="stylesheet" href="<?= $uri . '/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' ?>">
@@ -56,8 +54,6 @@ date_default_timezone_set("Asia/Jakarta");
     <!-- daterangepicker -->
     <script src="<?= $uri . '/assets/plugins/moment/moment.min.js' ?>"></script>
     <script src="<?= $uri . '/assets/plugins/daterangepicker/daterangepicker.js' ?>"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <!-- <script src="< ?= $uri . '/assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' ?>"></script> -->
     <!-- overlayScrollbars -->
     <script src="<?= $uri . '/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' ?>"></script>
     <!-- AdminLTE App -->
