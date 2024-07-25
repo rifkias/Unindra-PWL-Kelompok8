@@ -17,9 +17,9 @@ if(isset($_GET['type']) && isset($_GET['id'])){
     if(isset($_GET['search'])){
         $like = "'%".$_GET['search']."%'";
         if($where == ""){
-            $where .= "WHERE name LIKE ".$like;
+            $where .= "WHERE employe_name LIKE ".$like;
         }else{
-            $where .= "AND name LIKE ".$like;
+            $where .= "AND employe_name LIKE ".$like;
         }
     }
 
