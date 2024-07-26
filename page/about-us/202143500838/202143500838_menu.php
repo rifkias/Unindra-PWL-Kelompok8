@@ -10,7 +10,7 @@
     <nav>
         <h2>List Latihan</h2>
         <?php
-            $uri = "/page/about-us/202143500838";
+            $uri = "/kelompok1/page/about-us/202143500838";
         ?>
         <ul>
             <li><a href="<?= $uri ?>/202143500838_home.php">Home</a></li>
