@@ -98,12 +98,15 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top-fluid" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap" />
+                        <img class="card-img-top-fluid" src="<?= $uri."/assets/img/aboutUs/img5.jpg" ?>" alt="Card image cap" />
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text">Nama : Muhamad Yusup Maulana</p>
+                            <p class="card-text">NPM :202143500752</p>
+                            <p class="card-text">Hidup ini singkat, jadi jangan sia-siakan waktumu untuk hal-hal yang tidak penting. Fokuslah pada apa yang membuatmu bahagia dan berkembang.</p>
+
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <a href="<?= "$uri/page/about-us/202143500752/202143500752_index.php" ?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
 
                                 </div>
                                 <small class="text-muted">9 mins</small>
@@ -113,13 +116,14 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap" />
+                        <img class="card-img-top" src="<?= $uri."/assets/img/aboutUs/img6.jpg" ?>" alt="Card image cap" />
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text">Nama : Muhammad Zhafar Aly</p>
+                            <p class="card-text">NPM :202143500732</p>
+                            <p class="card-text">Keberhasilan bukanlah akhir, kegagalan bukanlah kekalahan. Yang terpenting adalah keberanian untuk terus melangkah.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    <a href="<?= "$uri/page/about-us/202143500732/202143500732_home.php" ?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
                                 </div>
                                 <small class="text-muted">9 mins</small>
                             </div>

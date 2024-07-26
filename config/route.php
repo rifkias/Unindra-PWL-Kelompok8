@@ -3,7 +3,7 @@ class phpRouting
 {
 
     private $npm = "202143500723";
-    private $isProd = true;
+    private $isProd = false;
     public function getPath()
     {
         $url = $_SERVER['REQUEST_URI'];
