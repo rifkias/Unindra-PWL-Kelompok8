@@ -3,7 +3,7 @@
 class Connection{
     protected $host = 'localhost'; 
     protected $username = 'root'; 
-    protected $password = '[password]'; 
+    protected $password = ''; 
     protected $database = 'db_payroll'; 
 
     function conn(){
