@@ -3,6 +3,7 @@ class phpRouting
 {
 
     private $npm = "202143500723";
+    private $isProd = true;
     public function getPath()
     {
         $url = $_SERVER['REQUEST_URI'];
@@ -182,7 +183,7 @@ class phpRouting
 
     public function getUri()
     {
-        $uri =  (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]";
+        $uri =  $this->checkHttps(). "://$_SERVER[HTTP_HOST]";
         $basePath = $this->getDirname();
         if ($basePath <> 'index.php') {
             if ($basePath == "/") {
@@ -193,6 +194,14 @@ class phpRouting
         }
 
         return $uri;
+    }
+
+    function checkHttps(){
+        if($this->isProd){
+            return 'https';
+        }else{
+            return empty($_SERVER['HTTPS']) ? 'http' : 'https';
+        }
     }
     public function checkAuth()
     {
