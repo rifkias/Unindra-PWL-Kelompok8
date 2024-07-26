@@ -130,6 +130,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="<?= $uri."/assets/img/aboutUs/img7.jpg" ?>" alt="Card image cap" />
+                        <div class="card-body">
+                            <p class="card-text">Nama : Mohammad lutfy Firmansyah</p>
+                            <p class="card-text">NPM :202143500777</p>
+                            <p class="card-text">Setiap hari adalah kesempatan baru untuk menjadi versi terbaik dari dirimu sendiri.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="<?= "$uri/page/about-us/202143500777/index.php" ?>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                                </div>
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
