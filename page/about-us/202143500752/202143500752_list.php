@@ -1,7 +1,7 @@
 <!-- <link rel="stylesheet" href="css/styles.css"> -->
 <div class="menu">
     <?php
-    $uri = "/page/about-us/202143500752";
+    $uri = "/kelompok1/page/about-us/202143500752";
     ?>
     <h3>List Latihan</h3>   
 

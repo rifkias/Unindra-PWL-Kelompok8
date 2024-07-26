@@ -9,7 +9,7 @@
     <link href="css/style.css" rel="stylesheet" />
 </head>
 <body>
-    <?php $uri = "/page/about-us/202143500734/index.php"; ?>
+    <?php $uri = "/kelompok1/page/about-us/202143500734/index.php"; ?>
         <?php include_once('_header.php') ?>
 <div class="kotak container-fluid text-center  col-12">
     <div class="row align-items-start">

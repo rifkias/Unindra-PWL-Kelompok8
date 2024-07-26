@@ -9,7 +9,7 @@
 <body>
     <nav>
         <?php
-        $uri = "/page/about-us/202143500732";
+        $uri = "/kelompok1/page/about-us/202143500732";
         ?>
         <h2>List Latihan</h2>
         <ul>

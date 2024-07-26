@@ -2,7 +2,7 @@
 <div class="menu">
         <h3>List Latihan</h3>
         <?php
-            $uri = "/page/about-us/202143500714";
+            $uri = "/kelompok1/page/about-us/202143500714";
         ?>
     <!--<a href="http://localhost/202143500714/202143500714_index.php?page=home">Home</a>
     <a href="http://localhost/202143500714/php/202143500714_Biodata.php">Biodata</a>
