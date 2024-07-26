@@ -108,7 +108,8 @@ $data = $controller->getData($_GET);
                             </thead>
                             <tbody>
                                 <?php
-                                $no = 1;
+                                $paginateData = $controller->getPagination();
+                                $no = $paginateData['currentNumber'] + 1;
                                 while ($d = $data->fetch_array()) {
                                 ?>
                                     <tr>
@@ -134,19 +135,24 @@ $data = $controller->getData($_GET);
                         </table>
                     </div>
                     <div class="card-footer clearfix">
+                    <?php
+                         $check = "?";
+                         if($paginateData['params'] !== ""){
+                             $check = "&";
+                         }
+                        ?>
                         <?php
-                        $paginateData = $controller->getPagination();
                         ?>
                         <ul class="pagination pagination-sm m-0 float-right">
-                            <li class="page-item <?= $paginateData['currentPage'] == '1' ? "disabled" : "" ?> "><a class="page-link" href="<?= $paginateData['params'] . "&page=" . $paginateData['currentPage'] - 1 ?>">«</a></li>
+                            <li class="page-item <?= $paginateData['currentPage'] == '1' ? "disabled" : "" ?> "><a class="page-link" href="<?= strtok($_SERVER["REQUEST_URI"], '?').$paginateData['params'] . $check . "page=" . $paginateData['currentPage'] - 1 ?>">«</a></li>
                             <?php
                             for ($x = 1; $x <= $paginateData['totalPage']; $x++) {
                             ?>
-                                <li class="page-item <?= $paginateData['currentPage'] == $x ? "disabled" : "" ?> "> <a class="page-link" href="<?= $paginateData['params'] . "&page=" . $x ?>"><?= $x ?></a> </li>
+                                <li class="page-item <?= $paginateData['currentPage'] == $x ? "disabled" : "" ?> "> <a class="page-link" href="<?= strtok($_SERVER["REQUEST_URI"], '?').$paginateData['params'] . $check . "page=" . $x ?>"><?= $x ?></a> </li>
                             <?php
                             }
                             ?>
-                            <li class="page-item <?= $paginateData['currentPage'] == $paginateData['totalPage'] ? "disabled" : "" ?>"><a class="page-link" href="<?= $paginateData['params'] . "&page=" . $paginateData['currentPage'] + 1 ?>">»</a></li>
+                            <li class="page-item <?= $paginateData['currentPage'] == $paginateData['totalPage'] ? "disabled" : "" ?>"><a class="page-link" href="<?= strtok($_SERVER["REQUEST_URI"], '?').$paginateData['params'] . $check . "page=" . $paginateData['currentPage'] + 1 ?>">»</a></li>
                         </ul>
                     </div>
                     <!-- /.card-body -->

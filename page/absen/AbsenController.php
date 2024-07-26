@@ -6,6 +6,7 @@ class AbsenController {
     protected $validator = null;
     protected $perPage = 10;
     protected $page = 1;
+    protected $where = "";
     public function __construct(Connection $conn)
     {
         $this->koneksi = $conn;
@@ -43,7 +44,9 @@ class AbsenController {
                 $where .= "AND absensi.absensi_date $params";
             }
         }
-       
+        
+        $this->where = $where;
+
         $perPage = $this->perPage;
         $page = $this->page;
 
@@ -85,7 +88,8 @@ class AbsenController {
         return $uri;
     }
     public function countData(){
-        $query = "SELECT * FROM location";
+        $where = $this->where;
+        $query = "SELECT absensi.*,employe.employe_name as employe_name FROM absensi LEFT JOIN employe on absensi.employe_id = employe.employe_id $where";
         $res = $this->koneksi->query($query);
         $total = $res->num_rows;
         return $total;

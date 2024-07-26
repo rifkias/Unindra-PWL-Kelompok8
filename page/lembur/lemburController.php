@@ -6,6 +6,7 @@ class lemburController {
     protected $validator = null;
     protected $perPage = 10;
     protected $page = 1;
+    protected $where= "";
     public function __construct(Connection $conn)
     {
         $this->koneksi = $conn;
@@ -46,6 +47,8 @@ class lemburController {
         $perPage = $this->perPage;
         $page = $this->page;
 
+        $this->where = $where;
+        
         $currentLimit =  ($page > 1) ? ($page * $perPage) - $perPage : "0";
         // $query = "SELECT * FROM location  $where limit $currentLimit , $perPage";
         $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, e.employe_name AS employe_name,e.employe_id AS employe_id, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id $where GROUP BY nameMonth, e.employe_name, e.employe_id limit $currentLimit , $perPage";
@@ -86,7 +89,8 @@ class lemburController {
     }
     public function countData(){
         //$query = "SELECT * FROM lembur";
-        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, e.employe_name AS employe_name,e.employe_id AS employe_id, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id GROUP BY nameMonth, e.employe_name, e.employe_id";
+        $where = $this->where;
+        $query = "SELECT MONTHNAME(a.absensi_date) AS nameMonth, e.employe_name AS employe_name,e.employe_id AS employe_id, COUNT(l.lembur_id) AS total_lembur, 200000 AS cost_overtime, COUNT(l.lembur_id) * 200000 AS amount_overtime FROM lembur l LEFT JOIN absensi a ON l.absensi_id = a.absensi_id LEFT JOIN employe e ON a.employe_id = e.employe_id $where GROUP BY nameMonth, e.employe_name, e.employe_id";
         $res = $this->koneksi->query($query);
         $total = $res->num_rows;
         return $total;

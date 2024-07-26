@@ -6,6 +6,7 @@ class KaryawanController {
     protected $validator = null;
     protected $perPage = 10;
     protected $page = 1;
+    protected $where = "";
     public function __construct(Connection $conn)
     {
         $this->koneksi = $conn;
@@ -46,7 +47,7 @@ class KaryawanController {
         }
         $perPage = $this->perPage;
         $page = $this->page;
-        
+        $this->where = $where;
         $currentLimit =  ($page > 1) ? ($page * $perPage) - $perPage : "0";
         $query = "SELECT employe.* ,location.name as location_name FROM employe LEFT JOIN location on location.location_id = employe.location_id $where limit $currentLimit , $perPage";
         $res = $this->koneksi->query($query);
@@ -84,7 +85,8 @@ class KaryawanController {
         return $uri;
     }
     public function countData(){
-        $query = "SELECT * FROM location";
+        $where = $this->where;
+        $query = "SELECT employe.* ,location.name as location_name FROM employe LEFT JOIN location on location.location_id = employe.location_id $where ";
         $res = $this->koneksi->query($query);
         $total = $res->num_rows;
         return $total;
