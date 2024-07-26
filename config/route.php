@@ -61,6 +61,9 @@ class phpRouting
                 case "dashboard":
                     $filename = "./page/dashboard/dashboard.php";
                     break;
+                case "about-us":
+                    $filename = "./page/about-us/aboutUs.php";
+                    break;
                 case "login":
                     $filename = "./page/login.php";
                     break;
@@ -98,34 +101,34 @@ class phpRouting
                     $filename = "./page/karyawan/delete.php";
                     break;
                 case "lembur":
-                     $filename = "./page/lembur/index.php";
+                    $filename = "./page/lembur/index.php";
                     break;
                 case "lembur/add":
-                     $filename = "./page/lembur/create.php";
+                    $filename = "./page/lembur/create.php";
                     break;
                 case "lembur/detail":
-                     $filename = "./page/lembur/detail.php";
+                    $filename = "./page/lembur/detail.php";
                     break;
                 case "lembur/edit":
-                     $filename = "./page/lembur/edit.php";
+                    $filename = "./page/lembur/edit.php";
                     break;
                 case "lembur/delete":
-                     $filename = "./page/lembur/delete.php";
+                    $filename = "./page/lembur/delete.php";
                     break;
                 case "absensi":
-                        $filename = "./page/absen/index.php";
+                    $filename = "./page/absen/index.php";
                     break;
                 case "absensi/add":
-                        $filename = "./page/absen/create.php";
+                    $filename = "./page/absen/create.php";
                     break;
                 case "absensi/detail":
-                        $filename = "./page/absen/detail.php";
+                    $filename = "./page/absen/detail.php";
                     break;
                 case "absensi/edit":
-                        $filename = "./page/absen/edit.php";
+                    $filename = "./page/absen/edit.php";
                     break;
                 case "absensi/delete":
-                        $filename = "./page/absen/delete.php";
+                    $filename = "./page/absen/delete.php";
                     break;
                 case "error":
                     $filename = "./page/errors/errorPage.php";

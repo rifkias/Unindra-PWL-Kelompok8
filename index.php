@@ -67,6 +67,9 @@ date_default_timezone_set("Asia/Jakarta");
     <script src="<?= $uri . '/assets/plugins/sweetalert2/sweetalert2.min.js' ?>"></script>
     <script src="<?= $uri . '/assets/plugins/select2/js/select2.full.min.js' ?>"></script>
 
+    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>
+
+
 </head>
 <?php
 if (!$isAuth) {

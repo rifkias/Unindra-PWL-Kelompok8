@@ -1,0 +1,101 @@
+/* styles.css */
+body {
+    background-color: #f2f2f2; /* background color */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+header, footer {
+    background-color: #4a90e2; /* blue background */
+    color: #fff; /* white text */
+    padding: 15px 20px;
+    text-align: center;
+    border-top: 4px ridge #356aac; /* darker blue border */
+    font-size: 18px;
+    position: relative; /* for gradient overlay */
+}
+
+header {
+    background-image: linear-gradient(to right, #4a90e2, #356aac); /* gradient background */
+}
+
+header h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+header::after, footer::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px; /* extends the ridge border visually */
+    width: 100%;
+    height: 4px;
+    background-color: #356aac; /* darker blue for border */
+}
+
+main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+nav {
+    width: 200px;
+    background-color: #e6e6e6; /* light gray background */
+    padding: 20px;
+    overflow-y: auto;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+nav ul li:hover {
+    color: #4a90e2; /* blue text on hover */
+}
+
+section {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 4px ridge #356aac; /* darker blue border */
+    text-align: center;
+    background-color: #fff; /* white background */
+}
+
+.separator {
+    border-left: 1px solid #ccc;
+    height: 100%;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.wrapper:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+

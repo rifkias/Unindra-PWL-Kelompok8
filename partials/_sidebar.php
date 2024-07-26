@@ -79,6 +79,14 @@
                           </p>
                       </a>
                   </li>
+                  <li class="nav-item">
+                      <a href="<?= $uri ?>/about-us" class="nav-link">
+                          <i class="nav-icon fas fa-info"></i>
+                          <p>
+                              Abous Us
+                          </p>
+                      </a>
+                  </li>
                  
               </ul>
           </nav>
