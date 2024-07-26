@@ -195,7 +195,7 @@ if (isset($_POST['submit'])) {
         $('#locationSelect').select2({
             ajax: {
                 delay: 250,
-                url: '<?= $uri . "/api/searchLocation.php" ?>',
+                url: '<?= $uri . "/api/search/searchLocation.php" ?>',
                 data: function(params) {
                     var query = {
                         "search": params.term
@@ -244,7 +244,7 @@ if (isset($_POST['submit'])) {
 
                 });
             }
-            var uri = "<?= $uri . "/api/searchLocation.php?type=detail&id=$id" ?>";
+            var uri = "<?= $uri . "/api/search/searchLocation.php?type=detail&id=$id" ?>";
             setPeriodeData(uri);
         <?php
         }

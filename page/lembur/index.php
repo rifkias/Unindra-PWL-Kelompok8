@@ -197,7 +197,7 @@ $data = $controller->getData($_GET);
         $('#karyawanSelect').select2({
             ajax: {
                 delay: 250,
-                url: '<?= $uri . "/api/searchEmploye.php" ?>',
+                url: '<?= $uri . "/api/search/searchEmploye.php" ?>',
                 data: function(params) {
                     var query = {
                         "search": params.term
@@ -246,7 +246,7 @@ $data = $controller->getData($_GET);
 
                 });
             }
-            var uri = "<?= $uri . "/api/searchEmploye.php?type=detail&id=$id" ?>";
+            var uri = "<?= $uri . "/api/search/searchEmploye.php?type=detail&id=$id" ?>";
             setPeriodeData(uri);
         <?php
         }

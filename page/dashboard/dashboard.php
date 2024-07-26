@@ -47,11 +47,11 @@ if ($dataAbsen) {
                     <?php
                     if ($type == 'checkin') {
                     ?>
-                        <a href="<?= $uri . "/api/checkInEmploye.php" ?>" class="small-box-footer">Check In <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?= $uri . "/api/absen/checkInEmploye.php" ?>" class="small-box-footer">Check In <i class="fas fa-arrow-circle-right"></i></a>
                     <?php
                     } else {
                     ?>
-                        <a href="<?= $uri . "/api/checkOutEmploye.php?absenId=$absenId" ?>" class="small-box-footer">Check Out <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?= $uri . "/api/absen/checkOutEmploye.php?absenId=$absenId" ?>" class="small-box-footer">Check Out <i class="fas fa-arrow-circle-right"></i></a>
                     <?php
                     }
                     ?>

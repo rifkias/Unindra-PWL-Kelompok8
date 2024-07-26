@@ -145,7 +145,7 @@ if (isset($_POST['submit'])) {
 
 
 
-        var uriAbsensi = "<?= $uri . "/api/getAbsensiDate.php" ?>";
+        var uriAbsensi = "<?= $uri . "/api/absen/getAbsensiDate.php" ?>";
 
         function getEmployeAttendance(id) {
             var uri = uriAbsensi + "?employe_id=" + id;
@@ -162,7 +162,7 @@ if (isset($_POST['submit'])) {
         $('#employeSelect').select2({
             ajax: {
                 delay: 250,
-                url: '<?= $uri . "/api/searchEmploye.php" ?>',
+                url: '<?= $uri . "/api/search/searchEmploye.php" ?>',
                 data: function(params) {
                     var query = {
                         "search": params.term
@@ -229,7 +229,7 @@ if (isset($_POST['submit'])) {
                 });
                 isUpdate = true;
             }
-            var uri = "<?= $uri . "/api/searchEmploye.php?type=detail&id=$id" ?>";
+            var uri = "<?= $uri . "/api/search/searchEmploye.php?type=detail&id=$id" ?>";
             setPeriodeData(uri);
         <?php
         }

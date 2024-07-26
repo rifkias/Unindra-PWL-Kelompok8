@@ -19,7 +19,8 @@ $data = $controller->getData($_GET);
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <a href="<?= $uri . '/karyawan/add' ?>"><button class="btn btn-primary float-right">Tambah Data</button></a>
+                <a href="<?= $uri . '/karyawan/add' ?>"><button class="btn btn-primary float-right mr-2">Tambah Data</button></a>
+                <a href="<?= $uri . '/api/report/employeExcel.php?'.$_SERVER['QUERY_STRING'] ?>"><button class="btn btn-primary mr-2 float-right">Download Report (Excel)</button></a>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -184,7 +185,7 @@ $data = $controller->getData($_GET);
         $('#locationSelect').select2({
             ajax: {
                 delay: 250,
-                url: '<?= $uri . "/api/searchLocation.php" ?>',
+                url: '<?= $uri . "/api/search/searchLocation.php" ?>',
                 data: function(params) {
                     var query = {
                         "search": params.term
@@ -233,7 +234,7 @@ $data = $controller->getData($_GET);
 
                 });
             }
-            var uri = "<?= $uri . "/api/searchLocation.php?type=detail&id=$id" ?>";
+            var uri = "<?= $uri . "/api/search/searchLocation.php?type=detail&id=$id" ?>";
             setPeriodeData(uri);
         <?php
         }

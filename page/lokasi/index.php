@@ -20,6 +20,8 @@ $data = $controller->getData($_GET);
         <div class="row">
             <div class="col-sm-12">
                 <a href="<?= $uri . '/lokasi/add' ?>"><button class="btn btn-primary float-right">Tambah Data</button></a>
+                <a href="<?= $uri . '/api/report/locationExcel.php?'.$_SERVER['QUERY_STRING'] ?>"><button class="btn btn-primary mr-2 float-right">Download Report (Excel)</button></a>
+
             </div>
         </div>
     </div><!-- /.container-fluid -->
