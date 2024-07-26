@@ -17,6 +17,12 @@ $data = $controller->getData($_GET);
                 </ol>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="<?= $uri . '/api/report/absensiExcel.php?' . $_SERVER['QUERY_STRING'] ?>"><button class="btn btn-primary mr-2 float-right">Download Report (Excel)</button></a>
+            </div>
+        </div>
+
         <!-- <div class="row">
             <div class="col-sm-12">
                 <a href="< ?= $uri . '/lokasi/add' ?>"><button class="btn btn-primary float-right">Tambah Data</button></a>
@@ -57,10 +63,10 @@ $data = $controller->getData($_GET);
                                         <label>
                                             Tanggal Absen
                                         </label>
-                                    <input type="text" name="absenDate" value="<?= @$_GET['absenDate'] ?>" class="form-control float-right" id="dateRange">
+                                        <input type="text" name="absenDate" value="<?= @$_GET['absenDate'] ?>" class="form-control float-right" id="dateRange">
                                     </div>
                                 </div>
-                              
+
                                 <div class="col-auto">
                                     <div class="form-group">
                                         <label>Perpage</label>
@@ -143,7 +149,7 @@ $data = $controller->getData($_GET);
 
     </div><!-- /.container-fluid -->
 </section>
-<form action="<?=$uri?>/lokasi/delete" method="POST" id="formDelete">
+<form action="<?= $uri ?>/lokasi/delete" method="POST" id="formDelete">
 </form>
 <script>
     function deleteValue(id) {
@@ -156,7 +162,7 @@ $data = $controller->getData($_GET);
             confirmButtonText: "Yes!",
         }).then((result) => {
             if (result.value) {
-                $('form#formDelete').append('<input type="text" name="id" id="id" hidden readonly value="'+id+'" />');
+                $('form#formDelete').append('<input type="text" name="id" id="id" hidden readonly value="' + id + '" />');
                 $("form#formDelete").submit();
             }
         });
