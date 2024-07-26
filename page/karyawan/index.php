@@ -21,7 +21,8 @@ $data = $controller->getData($_GET);
             <div class="col-sm-12">
                 <a href="<?= $uri . '/karyawan/add' ?>"><button class="btn btn-primary float-right mr-2">Tambah Data</button></a>
                 <a href="<?= $uri . '/api/report/employeExcel.php?'.$_SERVER['QUERY_STRING'] ?>"><button class="btn btn-primary mr-2 float-right">Download Report (Excel)</button></a>
-            </div>
+                <a href="<?= $uri . '/api/report/employePdf.php?'.$_SERVER['QUERY_STRING'] ?>" target="_blank"><button class="btn btn-primary mr-2 float-right">Download Report (Pdf)</button></a>
+                </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>

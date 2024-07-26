@@ -20,7 +20,8 @@ $data = $controller->getData($_GET);
         <div class="row">
             <div class="col-sm-12">
                 <a href="<?= $uri . '/api/report/absensiExcel.php?' . $_SERVER['QUERY_STRING'] ?>"><button class="btn btn-primary mr-2 float-right">Download Report (Excel)</button></a>
-            </div>
+                <a href="<?= $uri . '/api/report/absensiPdf.php?'.$_SERVER['QUERY_STRING'] ?>" target="_blank"><button class="btn btn-primary mr-2 float-right">Download Report (Pdf)</button></a>
+                </div>
         </div>
 
         <!-- <div class="row">
